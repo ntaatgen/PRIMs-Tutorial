@@ -1,0 +1,38 @@
+define task type-next {
+    initial-goals: (type-next)
+    default-activation: 1.0
+}
+
+define goal type-next {
+
+ operator retrieve-next-number {
+	V1 <> nil
+==>
+	next-num -> RT1
+	V1 -> RT2
+}
+
+ operator type-number {
+	RT2 = V1
+==>
+    type -> AC1
+    RT3 -> AC2
+}
+
+}
+
+define facts {
+ (n1 next-num one two)
+ (n2 next-num two three)
+}
+
+define action type {
+  latency: 0.2
+  output: Typing
+}
+
+define script {
+	screen("two")
+	run-until-action("type")
+	trial-end()
+}

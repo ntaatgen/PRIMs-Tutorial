@@ -1,0 +1,98 @@
+// Simple semantic model
+//
+
+define task semantic {
+    initial-goals: (semantic)
+    ol: t
+    rt: -2.0
+    lf: 0.2
+    default-operator-self-assoc: 0.0
+    default-activation: 1.0
+}
+
+define goal semantic {
+    operator start-semantic {
+    "Start semantic reasoning"
+        V1 <> nil
+        WM1 = nil
+     ==>
+        V1 -> WM1
+        property -> RT1
+        V1 -> RT2
+        subvocalize -> AC1
+        V1 -> AC2
+    }
+
+    operator move-up-tree {
+    "Move up the tree"
+        RT2 = WM1
+        V2 <> WM1
+        ==>
+        RT3 -> WM1
+        property -> RT1
+        RT3 -> RT2
+        subvocalize -> AC1
+        RT3 -> AC2
+    }
+
+    operator say-yes {
+    "Say yes when found"
+        V2 = WM1
+        ==>
+        say -> AC1
+        yes -> AC2
+        stop -> G1
+    }
+
+    operator say-no {
+    "Say no on retrieval failure"
+        V2 <> WM1
+        RT1 = error
+        ==>
+        say -> AC1
+        no -> AC2
+        stop -> G1
+    }
+}
+
+define action subvocalize {
+    latency: 0.2
+    noise: 0.08
+    distribution: uniform
+    output: Subvocalizing
+}
+
+define action say {
+    latency: 0.3
+    noise: 0.1
+    distribution: uniform
+    output: Saying
+}
+
+
+define facts {
+
+    (sem1  property  lion  mammal)
+    (sem2  property  mammal  animal)
+    (sem3  property  animal living-thing)
+    (sem4  property  plant living-thing)
+    (sem5  property  tulip plant)
+    (sem6  property  bird animal)
+    (sem7  property  tweety bird)
+    (sem8  property  robin bird)
+
+}
+
+
+define script {
+    pairs = [["lion","living-thing","yes"],["tulip","animal","no"],["mammal","living-thing","yes"],["lion","plant","no"]]
+    pairno = random(length(pairs))
+    pair = pairs[pairno]
+    print("Is",pair[0],"a",pair[1],"?")
+    screen(pair[0],pair[1])
+    run-until-action("say")
+    issue-reward()
+    trial-end()
+}
+
+

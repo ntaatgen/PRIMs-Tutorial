@@ -1,0 +1,38 @@
+define task name-color {
+    initial-goals: (name-color)
+    default-activation: 1.0
+}
+
+define goal name-color {
+
+ operator retrieve-memory {
+	V1 <> nil
+==>
+	color-of -> RT1
+	V1 -> RT2
+}
+
+ operator say-answer {
+	RT2 = V1
+==>
+    say -> AC1
+    RT3 -> AC2
+}
+
+}
+
+define facts {
+ (c1 color-of banana yellow)
+ (c2 color-of carror orange)
+}
+
+define action say {
+  latency: 0.3
+  output: Say
+}
+
+define script {
+	screen("banana")
+	run-until-action("say")
+	trial-end()
+}
