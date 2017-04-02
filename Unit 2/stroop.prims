@@ -1,0 +1,146 @@
+// Model of the Stroop task
+// Adapatation of original PR model
+
+define task stroop {
+    initial-goals: (stroop)
+    goals: (attendcolor default-attend focuscolor)
+    task-constants: (neutral focuscolor)
+    lf: 0.2
+    egs: 0.05
+    rt: -3.0
+    alpha: 0.05
+    default-activation: 1.0
+    input-activation: 1.0
+    default-operator-assoc: 8.0
+    default-inter-operator-assoc: 4.0
+    goal-operator-learning: t
+    beta: 0.05
+    reward: 10.0
+    explore-exploit: 0.0
+}
+
+define goal stroop {
+
+    operator retrieve-response {
+        V2 <> nil
+        RT1 = nil
+        ==>
+        response -> RT1
+        V2 -> RT2
+    }
+
+    operator say-color {
+        RT3 <> nil
+        ==>
+        say -> AC1
+        RT3 -> AC2
+        stop -> G1
+    }
+
+}
+
+define goal default-attend {
+
+    operator just-wait(activation=1.5) {
+    "Just wait for the stimulus"
+        V1 = fixation
+        ==>
+        wait -> AC1
+    }
+
+
+    operator attend(activation=1.5) {
+        V1 = stim
+        V2 = nil
+        ==>
+        attend -> AC1
+    }
+}
+
+define goal attendcolor {
+
+    operator prepare {
+        "Prepare for the upcoming stimulus"
+        V1 = fixation
+        G2 = nil
+        ==>
+        focuscolor -> G2
+    }
+
+    operator wait-when-prepared {
+        V1 = fixation
+        G2 <> nil
+        ==>
+        wait -> AC1
+    }
+}
+
+define goal focuscolor {
+    operator attendjustcolor {
+        V1 = stim
+        V2 = nil
+        ==>
+        attendcolor -> AC1
+    }
+}
+
+define action say {
+    latency: 0.3
+    noise: 0.1
+    distribution: uniform
+    output: Saying
+}
+
+define action attend {
+    latency: 0.085
+    output: Attending
+}
+
+define action attendcolor {
+    latency: 0.085
+    output: AttendingColor
+}
+
+
+define facts {
+    (red-word-assoc response red-word red :activation 0.0)
+    (blue-word-assoc response blue-word blue :activation 0.0)
+    (red-color-assoc response red-color red :activation 0.0)
+    (blue-color-assoc response blue-color blue :activation 0.0)
+}
+
+define sji {
+    (red-word red-word-assoc 1.5)(red-word blue-word-assoc -1.5)
+    (red-color blue-color-assoc -1.5)(red-color red-color-assoc 1.5)
+    (blue-word red-word-assoc -1.5)(blue-word blue-word-assoc 1.5)
+    (blue-word red-color-assoc -1.5)(blue-word blue-color-assoc 1.5)
+    (red-word blue-color-assoc -1.5)(red-word red-color-assoc 1.5)
+    (blue-color blue-color-assoc 1.5)(blue-color red-color-assoc -1.5)
+}
+
+
+define script {
+	trials = [["red-color","red-word","consistent"],
+			  ["blue-color","blue-word","consistent"],
+			  ["red-color","blue-word","conflict"],
+			  ["blue-color","red-word","conflict"]]
+	for trial in trials {
+		set-data-file-field(1, trial[2])
+		print("Presenting", trial[2], "with", trial[0], "and", trial[1])
+		screen("fixation")
+		run-relative-time(1.0)
+		screen("stim")
+		run-until-action()
+		ac = last-action()
+		if (ac[0] == "attend") {
+			screen("stim", trial[0], trial[1])
+		} else {
+			screen("stim", trial[0])
+		}
+		run-until-action("say")
+		issue-reward()
+		trial-end()
+	}
+}
+
+			  

@@ -1,0 +1,171 @@
+// Model of task switching from the Karbach and Kray experiment
+// Adapted from the original PR model
+
+define task taskswitching {
+    initial-goals: (taskswitching)
+    goals: (prepare-next)
+    task-constants: (dotask prepare-next)
+    lf: 0.2
+    egs: 0.05
+    rt: -1.0
+    input-activation: 0.0
+    default-activation: 1.0
+    alpha: 0.05
+    goal-operator-learning: t
+    beta: 0.05
+    reward: 80.0
+    default-operator-assoc: 8.0
+    default-inter-operator-assoc: 4.0
+    imaginal-autoclear: nil
+}
+
+define goal taskswitching {
+
+    operator choose-next-task {
+        V1 = fixation
+        G2 = nil
+        ==>
+        prepare-next -> G2
+    }
+
+    operator get-food-property {
+        V1 = stimulus
+        V2 = nil
+        WM1 = foodtask
+        RT1 = nil
+        ==>
+        attend -> AC1
+        food -> AC2
+    }
+
+    operator get-size-property {
+        V1 = stimulus
+        V2 = nil
+        WM1 = sizetask
+        RT1 = nil
+        ==>
+        attend -> AC1
+        size -> AC2
+    }
+
+    operator get-mapping {
+        V1 = stimulus
+        V2 <> nil
+        RT1 = nil
+        ==>
+        mapping -> RT1
+        V2 -> RT2
+    }
+
+    operator press-key {
+        RT1 = mapping
+        ==>
+        press -> AC1
+        RT3 -> AC2
+    }
+
+
+
+    operator last-stimulus {
+        V1 = end
+        ==>
+        say -> AC1
+        stop -> AC2
+        stop -> G1
+    }
+
+
+}
+
+define goal prepare-next {
+    operator set-first-task {
+        V1 = fixation
+        WM1 = nil
+        ==>
+        foodtask -> WM1
+        one -> WM2
+        nil -> G2
+        wait -> AC1
+    }
+
+    operator determine-next-task-retrieve-count {
+        V1 = fixation
+        RT1 = nil
+        WM1 <> nil
+        ==>
+        count-fact->RT1
+        WM2->RT2
+    }
+
+    operator determine-next-task-decide-to-stay {
+        RT1 = count-fact
+        RT3 = two
+        ==>
+        RT3 -> WM2
+        nil -> G2
+        wait -> AC1
+    }
+
+    operator determine-next-task-decide-to-switch {
+        RT1 = count-fact
+        RT3 = three
+        ==>
+        one -> WM2
+        othertask -> RT1
+        WM1 -> RT2
+    }
+
+    operator set-other-task {
+        RT1 = othertask
+        ==>
+        RT3 -> WM1
+        nil -> G2
+        wait -> AC1
+    }
+}
+
+define facts {
+
+    (cf1 count-fact  one  two)
+    (cf2 count-fact  two  three)
+    (foodtask foodtask)
+    (sizetask sizetask)
+    (ot1 othertask sizetask foodtask)
+    (ot2 othertask foodtask sizetask)
+    (mp1 mapping fruit left)
+    (mp2 mapping vegetable right)
+    (mp3 mapping small left)
+    (mp4 mapping large right)
+}
+
+
+define script {
+    foods = ["vegetable","fruit"]
+    sizes = ["large","small"]
+    for i in 0 to 7 {
+        screen("fixation")
+        run-relative-time(1.0)
+        screen("stimulus")
+        run-until-action("attend")
+        action = last-action()
+        choice = random(2)
+        if (action[0] == "attend") {
+            if (action[1] == "food") {
+                print("Looking at food")
+                cat = foods[choice]
+                screen("stimulus",cat)
+            }
+            if (action[1] == "size") {
+                print("Looking at size")
+                cat = sizes[choice]
+                screen("stimulus",cat)
+            }
+        }
+        run-until-action("press")
+    }
+    screen("end")
+    run-until-action("say")
+    issue-reward()
+    trial-end()
+}
+

@@ -1,0 +1,6 @@
+repeat 10
+reset
+run stroop stroopcontrol 50
+reset
+run taskswitching taskswitching 300
+run stroop strooptransfer 50
