@@ -1,0 +1,34 @@
+// Add numbers by counting
+// The script assumes that the final action is "answer"
+//
+
+define task add {
+    initial-goals: (add)
+    default-activation: 1.0
+}
+
+
+
+define facts {
+    (cf0 count-fact  zero  one :activation 3.0)
+    (cf1 count-fact  one  two :activation 3.0)
+    (cf2 count-fact  two  three :activation 3.0)
+    (cf3  count-fact  three  four :activation 3.0)
+    (cf4  count-fact  four  five :activation 3.0)
+    (cf5  count-fact  five  six :activation 3.0)
+    (cf6  count-fact  six  seven :activation 3.0)
+    (cf7  count-fact  seven  eight :activation 3.0)
+    (cf8  count-fact  eight  nine :activation 3.0)
+    (cf9  count-fact  nine  ten :activation 3.0)
+}
+
+define script {
+	digits = ["zero","one","two","three","four","five","six","seven","eight","nine","ten"]
+    num1 = random(4) + 1
+    num2 = random(4) + 1
+    print("Adding",digits[num1],"and",digits[num2])
+    screen(digits[num1],digits[num2])
+    run-until-action("answer")
+    issue-reward()
+    trial-end()
+}

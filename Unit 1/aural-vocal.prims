@@ -1,0 +1,42 @@
+define task aural-vocal {
+    initial-goals: (aural-vocal)
+    default-activation: 1.0
+}
+
+define goal aural-vocal {
+
+ operator retrieve-memory {
+	V1 <> nil
+==>
+	associate -> RT1
+	V1 -> RT2
+}
+
+ operator say-answer {
+	RT3 <> nil
+==>
+    say -> AC1
+    RT3 -> AC2
+}
+
+}
+
+define facts {
+ (av1 associate low one)
+ (av2 associate medium two)
+ (av3 associate high three)
+}
+
+define action say {
+  latency: 0.3
+  output: Say
+}
+
+define script {
+	stimuli = ["low", "medium", "high"]
+	stimulus = stimuli[random(3)]
+	screen(stimulus)
+	run-until-action("say")
+	issue-reward()
+	trial-end()
+}

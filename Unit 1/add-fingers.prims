@@ -1,0 +1,37 @@
+// This model performs addition by using its fingers to maintain one of the counters
+// The "say" action also sticks up an additional finger
+// The assumption of the script is that the final action is "answer" followed by the number that is the answer
+
+define task add-fingers {
+initial-goals: (add-fingers)
+  ol: t
+  rt: -2.0
+  lf: 0.2
+  default-operator-self-assoc: 0.0
+  egs: 0.05
+  default-activation: 1.0 // All chunks defined in this model receive a fixed baselevel activation of 1.0
+}
+
+
+define script {
+	digits = ["zero","one","two","three","four","five","six","seven","eight","nine","ten"]
+    num1 = random(4) + 1
+    num2 = random(4) + 1
+    print("Adding",digits[num1],"and",digits[num2])
+    screen(digits[num1],digits[num2])
+    done = 0
+    fingers = 0
+    while (!done) {
+    	run-until-action()
+		ac = last-action()
+		if (ac[0] == "say") {
+			fingers = fingers + 1
+			screen(digits[num1],digits[num2],digits[fingers])
+		}
+		if (ac[0] == "answer") {
+			done = 1
+		}
+	}
+    issue-reward()
+    trial-end()
+}
