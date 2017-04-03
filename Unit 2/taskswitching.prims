@@ -4,7 +4,6 @@
 define task taskswitching {
     initial-goals: (taskswitching)
     goals: (prepare-next)
-    task-constants: (dotask prepare-next)
     lf: 0.2
     egs: 0.05
     rt: -1.0
@@ -17,15 +16,16 @@ define task taskswitching {
     default-operator-assoc: 8.0
     default-inter-operator-assoc: 4.0
     imaginal-autoclear: nil
+	references: (prepare)
 }
 
 define goal taskswitching {
 
-    operator choose-next-task {
+    operator prepare-for-stimulus {
         V1 = fixation
         G2 = nil
         ==>
-        prepare-next -> G2
+        prepare -> G2
     }
 
     operator get-food-property {
@@ -125,7 +125,6 @@ define goal prepare-next {
 }
 
 define facts {
-
     (cf1 count-fact  one  two)
     (cf2 count-fact  two  three)
     (foodtask foodtask)
@@ -142,6 +141,7 @@ define facts {
 define script {
     foods = ["vegetable","fruit"]
     sizes = ["large","small"]
+    set-goal("taskswitching",["prepare", "prepare-next"])    
     for i in 0 to 7 {
         screen("fixation")
         run-relative-time(1.0)

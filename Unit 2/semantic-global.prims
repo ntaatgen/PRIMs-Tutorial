@@ -13,7 +13,6 @@ references: (fact-type action final-action final-response final-response-negativ
 
 define goal semantic {
 operator start-semantic {
-"Start semantic reasoning"
 V1 <> nil
 WM1 = nil
 ==>
@@ -25,7 +24,6 @@ V1 -> AC2
 }
 
 operator move-up-tree {
-"Move up the tree"
 RT2 = WM1
 V2 <> WM1
 ==>
@@ -37,7 +35,6 @@ RT3 -> AC2
 }
 
 operator say-yes {
-"Say yes when found"
 V2 = WM1
 ==>
 final-action -> AC1
@@ -46,7 +43,6 @@ nil -> G1
 }
 
 operator say-no {
-"Say no on retrieval failure"
 V2 <> WM1
 RT1 = error
 ==>
@@ -86,7 +82,7 @@ define facts {
 
 
 define script {
-	set-goal("semantic",["fact-type","property"],["action","sub-vocalize"],["final-action","say"], ["final-reponse","yes"],["final-response-negative","no"])
+	set-goal("semantic",["fact-type","property"],["action","sub-vocalize"],["final-action","say"], ["final-response","yes"],["final-response-negative","no"])
     pairs = [["lion","living-thing","yes"],["tulip","animal","no"],["mammal","living-thing","yes"],["lion","plant","no"]]
     pairno = random(length(pairs))
     pair = pairs[pairno]

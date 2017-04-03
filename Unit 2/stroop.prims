@@ -4,7 +4,6 @@
 define task stroop {
     initial-goals: (stroop)
     goals: (attendcolor default-attend focuscolor)
-    task-constants: (neutral focuscolor)
     lf: 0.2
     egs: 0.05
     rt: -3.0
@@ -17,6 +16,7 @@ define task stroop {
     beta: 0.05
     reward: 10.0
     explore-exploit: 0.0
+    references: (prepare)
 }
 
 define goal stroop {
@@ -59,12 +59,12 @@ define goal default-attend {
 
 define goal attendcolor {
 
-    operator prepare {
+    operator prepare-for-stimulus {
         "Prepare for the upcoming stimulus"
         V1 = fixation
         G2 = nil
         ==>
-        focuscolor -> G2
+        prepare -> G2
     }
 
     operator wait-when-prepared {
@@ -124,6 +124,7 @@ define script {
 			  ["blue-color","blue-word","consistent"],
 			  ["red-color","blue-word","conflict"],
 			  ["blue-color","red-word","conflict"]]
+	set-goal("stroop",["prepare","focuscolor"])
 	for trial in trials {
 		set-data-file-field(1, trial[2])
 		print("Presenting", trial[2], "with", trial[0], "and", trial[1])
