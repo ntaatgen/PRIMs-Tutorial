@@ -1,0 +1,92 @@
+define task multi-column-addition {
+initial-goals: (multi-column-addition)
+default-activation: 1.0
+references: (fact-type)
+}
+
+define goal multi-column-addition {
+
+	operator retrieve-arithmetic-fact {
+		V1 <> nil
+		V2 <> nil
+		V3 = nil
+		RT1 = nil
+		==>
+		fact-type -> RT1
+		V1 -> RT2
+		V2 -> RT3
+	}
+
+	operator check-addition-carry {
+		RT1 = fact-type
+		V1 = RT2
+		WM1 <> nil
+		==>
+		fact-type -> RT1
+		RT4 -> RT2
+		WM1 -> RT3
+		nil -> WM1
+	}
+
+	operator write-answer-no-carry {
+		RT1 <> nil
+		RT5 = nil
+		WM1 = nil
+		==>
+		write -> AC1
+		RT4 -> AC2
+	}
+
+	operator write-answer-carry {
+		RT1 <> nil
+		RT5 <> nil
+		WM1 = nil
+		==>
+		write -> AC1
+		RT4 -> AC2
+		RT5 -> WM1
+	}
+
+
+	operator next-column {
+		V3 <> nil
+		==>
+		attend-next-column -> AC1
+	}
+
+	operator done-with-multicolumn-addition {
+		V1 = done
+		==>
+		say -> AC1
+		done -> AC2
+		nil -> G1
+	}
+}
+
+
+
+define facts {
+	(add1 addition one three four)
+	(add2 addition five six one one)
+	(add3 addition five two seven)
+	(add4 addition seven one eight)
+}
+
+// Solve 551 + 263
+
+define script {
+	set-goal("multi-column-addition",["fact-type","addition"])
+	sequence = [["one","three"],["five","six"],["five","two"]]
+	for pair in sequence {
+		screen(pair[0],pair[1])
+		run-until-action("write")
+		answer = last-action()
+		screen(pair[0],pair[1],answer[1])
+		run-until-action("attend-next-column")
+	}
+	screen("done")
+	run-until-action("say","done")
+	issue-reward()
+	trial-end()
+}
+

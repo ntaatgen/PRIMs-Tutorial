@@ -1,0 +1,120 @@
+define task multi-column-multiplication {
+initial-goals: (multi-column-multiplication)
+goals: (multi-column-addition)
+default-activation: 1.0
+references: (main-fact-type fact-type)
+}
+
+define goal multi-column-multiplication {
+
+
+}
+
+define goal multi-column-addition {
+
+	operator retrieve-arithmetic-fact {
+		V1 <> nil
+		V2 <> nil
+		V3 = nil
+		RT1 = nil
+		==>
+		fact-type -> RT1
+		V1 -> RT2
+		V2 -> RT3
+	}
+
+	operator check-addition-carry {
+		RT1 = fact-type
+		V1 = RT2
+		WM1 <> nil
+		==>
+		fact-type -> RT1
+		RT4 -> RT2
+		WM1 -> RT3
+		nil -> WM1
+	}
+
+	operator write-answer-no-carry {
+		RT1 <> nil
+		RT5 = nil
+		WM1 = nil
+		==>
+		write -> AC1
+		RT4 -> AC2
+	}
+
+	operator write-answer-carry {
+		RT1 <> nil
+		RT5 <> nil
+		WM1 = nil
+		==>
+		write -> AC1
+		RT4 -> AC2
+		RT5 -> WM1
+	}
+
+
+	operator next-column {
+		V3 <> nil
+		==>
+		attend-next-column -> AC1
+	}
+
+	operator done-with-multicolumn-addition {
+		V1 = done
+		==>
+		say -> AC1
+		done -> AC2
+		nil -> G1
+	}
+}
+
+define facts {
+	(add11 addition zero zero zero)
+	(add12 addition six zero six)
+	(add13 addition zero three zero)
+	(mult1 multiplication five four zero two)
+	(mult2 multiplication one four four)
+	(add14 addition four two six)
+	(mult3 multiplication five two zero one)
+	(mult4 multiplication one two two)
+	(add15 addition two one three)
+}
+
+// Solve 15 x 24
+
+define script {
+	set-goal("multi-column-multiplication",["main-fact-type","multiplication"],["fact-type","addition"])
+	set-goal("multi-column-addition",["fact-type","addition"])
+	sequence = [["five","four"],["one","four"],["column-done"],["five","two"],["one","two"]]
+	for pair in sequence {
+		if (pair[0] == "column-done") {
+			screen(pair[0])
+			run-until-action("attend-next-column-second-row")
+		} else {
+			screen(pair[0],pair[1])
+			run-until-action("write")
+			answer = last-action()
+			screen(pair[0],pair[1],answer[1])
+			run-until-action("attend-next-column")
+		}
+	}
+	screen("all-columns-done")
+	run-until-action("shift-to-addition")		
+	sequence = [["zero","zero"],["six","zero"],["zero","three"]]
+	for pair in sequence {
+		screen(pair[0],pair[1])
+		run-until-action("write")
+		answer = last-action()
+		screen(pair[0],pair[1],answer[1])
+		run-until-action("attend-next-column")
+	}
+	screen("done")
+	run-until-action("say","done")
+	issue-reward()
+	trial-end()
+}
+
+
+
+
