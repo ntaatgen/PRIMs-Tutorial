@@ -2,7 +2,7 @@ define task multi-column-multiplication {
 initial-goals: (multi-column-multiplication)
 goals: (multi-column-addition)
 default-activation: 1.0
-references: (main-fact-type fact-type)
+references: (fact-type)
 }
 
 define goal multi-column-multiplication {
@@ -84,7 +84,7 @@ define facts {
 // Solve 15 x 24
 
 define script {
-	set-goal("multi-column-multiplication",["main-fact-type","multiplication"],["fact-type","addition"])
+	set-goal("multi-column-multiplication",["fact-type","multiplication"])
 	set-goal("multi-column-addition",["fact-type","addition"])
 	sequence = [["five","four"],["one","four"],["column-done"],["five","two"],["one","two"]]
 	for pair in sequence {
