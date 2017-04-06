@@ -12,7 +12,6 @@ define task semantic {
 
 define goal semantic {
     operator start-semantic {
-    "Start semantic reasoning"
         V1 <> nil
         WM1 = nil
      ==>
@@ -24,7 +23,6 @@ define goal semantic {
     }
 
     operator move-up-tree {
-    "Move up the tree"
         RT2 = WM1
         V2 <> WM1
         ==>
@@ -36,7 +34,6 @@ define goal semantic {
     }
 
     operator say-yes {
-    "Say yes when found"
         V2 = WM1
         ==>
         say -> AC1
@@ -45,7 +42,6 @@ define goal semantic {
     }
 
     operator say-no {
-    "Say no on retrieval failure"
         V2 <> WM1
         RT1 = error
         ==>
