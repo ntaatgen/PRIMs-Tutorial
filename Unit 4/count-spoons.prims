@@ -1,0 +1,215 @@
+// Count the total number of spoons on two placemats
+//
+
+define task count-spoons {
+    initial-goals: (add-all count-goal determine-attribute)
+    goals: (count-goal determine-attribute)
+    imaginal-autoclear: nil
+    rt: -2.0
+    lf: 0.3
+    ans: 0.1
+    default-activation: 1.0
+    references: (container item-type subtask subsubtask action target)
+}
+
+define facts {
+    (zero number-fact 0)
+    (one number-fact 1)
+    (two number-fact 2)
+    (three number-fact 3)
+    (four number-fact 4)
+    (five number-fact 5)
+    (six number-fact 6)
+    (cf0 count-fact zero one)
+    (cf1 count-fact  one  two)
+    (cf2 count-fact  two  three)
+    (cf3  count-fact  three  four)
+    (cf4  count-fact  four  five)
+    (cf5  count-fact  five  six)
+    (adf1 addition-fact one zero one)
+    (adf2 addition-fact two one three)
+}
+
+define goal add-all {
+    operator init-add-all {
+        WM1=nil
+        V1=screen
+        ==>
+        >>V3  // shift to the first container (placemat)
+        overall-total -> WM1
+        zero -> WM3 // that is the current total
+        >>WM4 // this creates a new chunk that is placed in WM4, and shifts focus to that chunk
+        total-count -> WM1
+        push-goal -> AC1
+        subtask -> AC2
+    }
+
+    operator add-result-to-total-retrieve {
+        WM1 = overall-total
+        >>WM4
+        WM2 <> nil
+    ==>
+        addition-fact -> RT1
+        WM2 -> RT2
+        WM<<
+        WM3 -> RT3
+        nil -> WM4
+    }
+
+    operator add-result-to-total-move-on {
+        WM1 = overall-total
+        RT1 = addition-fact
+        V2 <> nil // There are still more containers
+    ==>
+        RT4 -> WM3
+        >>V2
+        >>WM4 // this should create a new chunk that is placed in WM4, and shifts focus to that chunk
+        total-count -> WM1
+        push-goal -> AC1
+        subtask -> AC2
+    }
+
+    operator add-result-to-total-done {
+        WM1 = overall-total
+        RT1 = addition-fact
+        V2 = nil // No more containers
+    ==>
+        RT4 -> WM2 // This is the slot where the final total should end up
+    }
+
+    operator report-result {
+        WM1 = overall-total
+        WM2 <> nil
+        ==>
+        action -> AC1
+        WM2 -> AC2
+        nil->G1  // We want to replace this with nil->G eventually
+    }
+}
+
+
+
+define goal count-goal {
+    operator init-countgoal {
+        WM1 = total-count
+        WM3 = nil
+        V1 = container
+        ==>
+        zero -> WM3
+        >>V3 // shift to first item
+        >>WM4 // Determine whether this is something that we need to count
+        member -> WM1
+        push-goal -> AC1
+        subsubtask -> AC2
+    }
+
+    operator move-one-if-not-countable-and-not-last {
+        WM1 = total-count
+        >>WM4
+        WM2 = no
+        WM<<
+        V2 <> nil
+        ==>
+        >>V2 // shift to next item
+        nil -> WM4
+        >>WM4
+        member -> WM1
+        push-goal -> AC1
+        subsubtask -> AC2
+    }
+
+    operator move-one-if-not-countable-and-last {
+        WM1 = total-count
+        >>WM4
+        WM2 = no
+        WM<<
+        V2 = nil
+        ==>
+        WM3 -> WM2
+        WM<<  // Shift up back to whoever wanted to count
+        V<<  // Shift up back to container
+        remove-goal -> AC1
+    }
+
+    operator retrieve-count-fact-for-countable-item {
+        WM1 = total-count
+        >>WM4
+        WM2 = yes
+        WM<<
+    ==>
+        count-fact -> RT1
+        WM3 -> RT2
+        nil -> WM4
+    }
+
+    operator add-count-and-not-last {
+        RT1 = count-fact
+        V2 <> nil
+    ==>
+        >>V2 // shift to next item
+        RT3 -> WM3
+        >>WM4
+        member -> WM1
+        push-goal -> AC1
+        subsubtask -> AC2
+    }
+
+    operator add-count-last {
+        RT1 = count-fact
+        V2 = nil
+    ==>
+        RT3 -> WM2
+        WM<<
+        V<<
+        remove-goal -> AC1
+    }
+}
+
+define goal determine-attribute {
+
+    operator answer-yes {
+        WM1 = member
+        V1 = item-type
+        V4 = target
+    ==>
+        yes -> WM2
+        WM<<
+        remove-goal -> AC1
+    }
+
+    operator answer-no {
+        WM1 = member
+        V1 = item-type
+        V4 <> target
+        ==>
+        no -> WM2
+        WM<<
+        remove-goal -> AC1
+    }
+
+}
+
+define visual {
+    (screen1 screen nil placemat1)
+    (placemat1 placemat placemat2 item1)
+    (placemat2 placemat nil item5)
+    (item1 utensil item2 nil fork)
+    (item2 utensil item3 nil fork)
+    (item3 utensil item4 nil knife)
+    (item4 utensil nil nil spoon)
+    (item5 utensil item6 nil fork)
+    (item6 utensil item7 nil knife)
+    (item7 utensil item8 nil spoon)
+    (item8 utensil nil nil spoon)
+}
+
+
+define script {
+    screen("screen1")
+    set-goal("add-all",["subtask","count-goal"],["action","say"],["container","placemat"])
+    set-goal("count-goal",["item-type","utensil"],["subsubtask","determine-attribute"])
+    set-goal("determine-attribute",["target","spoon"])
+    run-until-action("say")
+    issue-reward()
+    trial-end()
+}
