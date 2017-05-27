@@ -1,0 +1,106 @@
+// Which animal eats meat?
+// horse, cow, wolf
+
+define task eats-meat {
+    initial-goals: (find-value retrieve-attribute)
+    goals: (retrieve-attribute)
+    imaginal-autoclear: nil
+    rt: -2.0
+    lf: 0.3
+    ans: 0.1
+    default-activation: 1.0
+    references: (container item-type subtask subsubtask action target-value attribute subtask-type)
+}
+
+
+define goal find-value {
+    operator init-find-value {
+        WM1=nil
+        V1=screen
+        ==>
+        >>V3  // shift to the first container (bird)
+        find-target -> WM1
+        >>WM4 // this creates a new chunk that is placed in WM4, and shifts focus to that chunk
+        subtask-type -> WM1
+        push-goal -> AC1
+        subtask -> AC2
+    }
+
+    operator result-is-target {
+        WM1 = find-target
+        >>WM4
+        WM2 = target-value
+    ==>
+		action -> AC1
+		V0 -> AC2
+    }
+	
+	operator result-is-not-target-move-next {
+        WM1 = find-target
+        >>WM4
+        WM2 <> target-value 
+        V2 <> nil // there is a next 
+    ==>
+    	>>V2
+    	nil -> WM4
+    	>>WM4
+        subtask-type -> WM1
+        push-goal -> AC1
+        subtask -> AC2
+	}
+	
+	operator result-is-not-target-all-done {
+        WM1 = find-target
+        >>WM4
+        WM2 <> target-value 
+        V2 = nil // there is no next 
+	==>
+		action -> AC1
+		failed -> AC2
+	}	
+}
+
+define goal retrieve-attribute {
+	operator start-retrieve-attribute {
+		WM1 = retrieve-attribute-wm
+		RT1 = nil
+	==>
+		has-attribute -> RT1
+		V0 -> RT2
+		attribute -> RT3
+	}
+	
+	operator return-attribute {
+		WM1 = retrieve-attribute-wm
+		RT1 = has-attribute
+	==>
+		RT4 -> WM2
+		WM<<
+		remove-goal -> AC1
+	}
+}
+
+define facts {
+	(horse-eats has-attribute horse eats hay)
+	(cow-eats has-attribute cow eats grass)
+	(wolf-eats has-attribute wolf eats meat)
+}
+
+
+define visual {
+    (screen1 screen nil horse)
+    (horse animal cow )
+    (cow animal wolf)
+    (wolf animal nil)
+    (chick1 chick chick2)
+}
+
+
+define script {
+    screen("screen1")
+    set-goal("find-value",["subtask","retrieve-attribute"],["action","say"],["target-value","meat"],["container","animal"],["subtask-type","retrieve-attribute-wm"])
+    set-goal("retrieve-attribute",["attribute","eats"])
+    run-until-action("say")
+    issue-reward()
+    trial-end()
+}

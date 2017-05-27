@@ -1,0 +1,97 @@
+/// This is an example model for time estimation
+/// It performs an elementary time estimation task in which the model perceives
+/// an interval and then reproduces it
+///
+/// T0 is the duration of the start pulse
+/// Tn+1 = aTn + noise(SD = b * a * Tn)
+/// The temporal module has three parameters:
+/// time-t0: the start time (default 0.011 or 0.1)
+/// time-a: the a parameter (default 1.1 or 1.02)
+/// time-b: the b parameter (default 0.015)
+///
+/// The temporal buffer is called T
+/// if the timer is active, T1 has the current pulse count
+/// T2 is set to T (true) each time the timer is incremented, the model can set it to nil to indiciate
+/// the time has been attended
+/// The timer is activated by putting "start" in T3
+/// Putting "stop" in T3 stops the timer
+/// Any match made against T1 will be successful if T1 is greater or equal to the
+/// time that it is compared to
+///
+
+define task peak-time {
+    initial-goals: (peak-time)
+    rt: -2.0
+    lf: 0.3
+    ans: 0.1
+    default-activation: 1.0
+    time-t0: 0.011 // these are the defaults and normally don't need to be set
+    time-a: 1.1
+    time-b: 0.015
+}
+
+define goal peak-time {
+operator register-start {
+    V1 = start
+    T1 = nil
+    ==>
+    start -> T3
+    wait -> AC1
+}
+
+operator register-stop {
+    V1 = stop
+    WM1 = nil
+    ==>
+    T1 -> WM1
+    stop -> T3
+    wait -> AC1
+}
+
+operator start-reproduce {
+    V1 = reproduce
+    T1 = nil
+    ==>
+    start -> T3
+}
+
+operator time-is-reached {
+    V1 = reproduce
+    T1 = WM1
+    ==>
+    press -> AC1
+    stop -> T3
+}
+
+operator time-is-not-reached {
+    V1 = reproduce
+    T1 <> WM1
+    ==>
+    focus -> AC1
+}
+
+}
+
+define action focus {
+    latency: 0.2
+    noise: 0.1
+    distribution: uniform
+    output: Focussing
+}
+
+define init-script {
+    set-graph-title("Reproduced time")
+}
+
+define script {
+    screen("start")
+    run-relative-time(2.0)
+    screen("stop")
+    run-relative-time(1.0)
+    screen("reproduce")
+    t = time()
+    run-until-action("press")
+    t-reproduced = time() - t
+    plot-point(t-reproduced)
+    trial-end()
+}
