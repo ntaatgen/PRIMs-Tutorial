@@ -1,0 +1,162 @@
+/// Which animals do not have hooves
+/// horse, pig, wolf, goat
+///
+
+define task not-hooves {
+    initial-goals: (find-all-values negate retrieve-attribute)
+    goals: (retrieve-attribute)
+    imaginal-autoclear: nil
+    rt: -2.0
+    lf: 0.3
+    ans: 0.1
+    default-activation: 1.0
+    references: (container item-type subtask subsubtask subsubtask-type action target-value attribute subtask-type)
+}
+
+
+define goal find-all-values {
+    operator init-find-all-values {
+        WM1=nil
+        V1=screen
+        ==>
+        >>V3  // shift to the first container 
+        find-target -> WM1
+        >>WM4 // this creates a new chunk that is placed in WM4, and shifts focus to that chunk
+        subtask-type -> WM1
+        push-goal -> AC1
+        subtask -> AC2
+    }
+
+    operator result-is-target-move-next {
+        WM1 = find-target
+        >>WM4
+        WM2 = target-value
+        WM<<
+        V2 <> nil // there is a next 
+    ==>
+		action -> AC1
+		V0 -> AC2
+    	>>V2
+    	nil -> WM4
+    	>>WM4
+        subtask-type -> WM1
+//	Still missing: subgoal pushing action
+    }
+    
+	operator result-is-target-all-done {
+        WM1 = find-target
+        >>WM4
+        WM2 = target-value
+        WM<<
+        V2 = nil // there is no next 
+    ==>
+		action -> AC1
+		V0 -> AC2
+		nil -> G1
+    }
+
+	operator result-is-not-target-move-next {
+        WM1 = find-target
+        >>WM4
+        WM2 <> target-value 
+        WM<<
+        V2 <> nil // there is a next 
+    ==>
+    	>>V2
+    	nil -> WM4
+    	>>WM4
+        subtask-type -> WM1
+        push-goal -> AC1
+        subtask -> AC2
+	}
+	
+	operator result-is-not-target-all-done {
+        WM1 = find-target
+        >>WM4
+        WM2 <> target-value 
+        WM<<
+        V2 = nil // there is no next 
+	==>
+		action -> AC1
+		stop -> AC2
+	}	
+}
+
+define goal negate {
+	operator start-do-subsub-task {
+		WM1 = negation
+		WM4 = nil
+	==>
+		>>WM4
+		subsubtask-type -> WM1
+		push-goal -> AC1
+		subsubtask -> AC2
+	}
+	operator yes-to-no {
+		WM1 = negation
+		>>WM4
+		WM2 = yes
+		WM<<
+	==>
+		no -> WM2
+		WM<<
+		remove-goal -> AC1
+	}
+	operator no-to-yes {
+		WM1 = negation
+		>>WM4
+		WM2 = no
+		WM<<
+	==>
+		yes -> WM2
+		WM<<
+		remove-goal -> AC1
+	}
+}
+
+define goal retrieve-attribute {
+	operator start-retrieve-attribute {
+		WM1 = retrieve-attribute-wm
+		RT1 = nil
+	==>
+		has-attribute -> RT1
+		V0 -> RT2
+		attribute -> RT3
+	}
+	
+	operator return-attribute {
+		WM1 = retrieve-attribute-wm
+		RT1 = has-attribute
+	==>
+		RT4 -> WM2
+		WM<<
+		remove-goal -> AC1
+	}
+}
+
+define facts {
+	(horse-hooves has-attribute horse hooves yes)
+	(pig-hooves has-attribute pig hooves yes)
+	(wolf-hooves has-attribute wolf hooves no)
+	(goat-hooves has-attribute goat hooves yes)
+}
+
+
+define visual {
+    (screen1 screen nil horse)
+    (horse animal pig )
+    (pig animal wolf)
+    (wolf animal goat)
+    (goat animal nil)
+}
+
+
+define script {
+    screen("screen1")
+    set-goal("find-all-values",["subtask","negate"],["action","say"],["target-value","yes"],["container","animal"],["subtask-type","negation"])
+    set-goal("negate",["subsubtask","retrieve-attribute"],["subsubtask-type","retrieve-attribute-wm"])
+    set-goal("retrieve-attribute",["attribute","hooves"])
+    run-until-action("say","stop")
+    issue-reward()
+    trial-end()
+}

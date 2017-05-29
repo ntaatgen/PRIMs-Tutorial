@@ -47,6 +47,7 @@ define goal find-value {
         WM1 = find-target
         >>WM4
         WM2 = target-value
+        WM<<
     ==>
 		action -> AC1
 		V0 -> AC2
@@ -56,6 +57,7 @@ define goal find-value {
         WM1 = find-target
         >>WM4
         WM2 <> target-value 
+        WM<<
         V2 <> nil // there is a next 
     ==>
     	>>V2
@@ -70,10 +72,11 @@ define goal find-value {
         WM1 = find-target
         >>WM4
         WM2 <> target-value 
+        WM<<
         V2 = nil // there is no next 
 	==>
 		action -> AC1
-		failed -> AC2
+		stop -> AC2
 	}	
 }
 
