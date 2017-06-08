@@ -28,6 +28,7 @@ define task peak-time {
     time-t0: 0.011 // these are the defaults and normally don't need to be set
     time-a: 1.1
     time-b: 0.015
+    blending: t
 }
 
 define goal peak-time {
