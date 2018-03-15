@@ -1,9 +1,9 @@
 define task aural-vocal {
-    initial-goals: (aural-vocal)
+    initial-skills: (aural-vocal)
     default-activation: 1.0
 }
 
-define goal aural-vocal {
+define skill aural-vocal {
 
  operator retrieve-memory {
 	V1 <> nil
@@ -13,7 +13,7 @@ define goal aural-vocal {
 }
 
  operator say-answer {
-	RT3 <> nil
+	RT2 = V1
 ==>
     say -> AC1
     RT3 -> AC2

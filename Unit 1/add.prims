@@ -3,10 +3,9 @@
 //
 
 define task add {
-    initial-goals: (add)
+    initial-skills: (add)
     default-activation: 1.0
 }
-
 
 
 define facts {

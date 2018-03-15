@@ -2,7 +2,7 @@
 // Adapted from the ACT-R tutorial by Niels Taatgen
 
 define task count {
-  initial-goals: (count) // In this example the task and the goal are the same
+  initial-skills: (count) // In this example the task and the goal are the same
   default-activation: 1.0 // All chunks defined in this model receive a fixed baselevel activation of 1.0
   ol: t
   rt: -2.0
@@ -12,7 +12,7 @@ define task count {
   retrieval-reinforces: t
 }
 
-define goal count {
+define skill count {
 //  Start counting
   operator start-count {
    V1 <> nil  // There has to be a visual input with the starting number
@@ -43,7 +43,7 @@ define goal count {
    ==>
     say -> AC1
     stop -> AC2
-    stop -> G1
+    nil -> G1
   }
 
 }

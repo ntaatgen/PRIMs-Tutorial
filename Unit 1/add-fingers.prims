@@ -3,7 +3,7 @@
 // The assumption of the script is that the final action is "answer" followed by the number that is the answer
 
 define task add-fingers {
-initial-goals: (add-fingers)
+initial-skills: (add-fingers)
   ol: t
   rt: -2.0
   lf: 0.2

@@ -2,7 +2,7 @@
 //
 
 define task semantic {
-    initial-goals: (semantic)
+    initial-skills: (semantic)
     ol: t
     rt: -2.0
     lf: 0.2
@@ -10,7 +10,7 @@ define task semantic {
     default-activation: 1.0
 }
 
-define goal semantic {
+define skill semantic {
     operator start-semantic {
         V1 <> nil
         WM1 = nil
@@ -47,7 +47,7 @@ define goal semantic {
         ==>
         say -> AC1
         no -> AC2
-        stop -> G1
+        nil -> G1
     }
 }
 
@@ -81,6 +81,7 @@ define facts {
 
 
 define script {
+	set-average-window(20)
     pairs = [["lion","living-thing","yes"],["tulip","animal","no"],["mammal","living-thing","yes"],["lion","plant","no"]]
     pairno = random(length(pairs))
     pair = pairs[pairno]

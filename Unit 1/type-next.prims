@@ -1,9 +1,9 @@
 define task type-next {
-    initial-goals: (type-next)
+    initial-skills: (type-next)
     default-activation: 1.0
 }
 
-define goal type-next {
+define skill type-next {
 
  operator retrieve-next-number {
 	V1 <> nil
@@ -18,7 +18,6 @@ define goal type-next {
     type -> AC1
     RT3 -> AC2
 }
-
 }
 
 define facts {

@@ -1,9 +1,9 @@
 define task name-color {
-    initial-goals: (name-color)
+    initial-skills: (name-color)
     default-activation: 1.0
 }
 
-define goal name-color {
+define skill name-color {
 
  operator retrieve-memory {
 	V1 <> nil
