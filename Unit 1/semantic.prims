@@ -81,7 +81,6 @@ define facts {
 
 
 define script {
-	set-average-window(20)
     pairs = [["lion","living-thing","yes"],["tulip","animal","no"],["mammal","living-thing","yes"],["lion","plant","no"]]
     pairno = random(length(pairs))
     pair = pairs[pairno]

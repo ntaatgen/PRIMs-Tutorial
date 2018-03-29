@@ -1,0 +1,50 @@
+
+define task daydream {
+    initial-skills: (daydream)
+    default-activation: 1.0
+    ol: t
+    rt: -2.0
+    lf: 0.2
+    default-operator-self-assoc: 0.0
+
+}
+
+define facts {
+	(episode chunk episode)
+	(epf1 episode breakfast school)
+	(epf2 episode school lunch)
+	(epf3 episode lunch more-school)
+	(epf4 episode more-school dinner)
+	(epf5 dinner homework)
+	(epf6 homework bed)
+}
+
+define skill daydream {
+	operator retrieve-episode {
+		RT1 = nil
+	==>
+		episode -> RT1
+	}
+	
+	operator associate {
+		RT1 = episode
+	==>
+		RT2 -> RT3
+	}
+	
+	operator restart {
+		RT1 = error
+	==>
+		episode -> RT1
+		stop -> AC1
+		done -> AC2
+ }
+}
+
+define script {
+	print("Starting daydream")
+	run-until-action("stop")
+//	print("Found action stop")
+    issue-reward()
+    trial-end()
+}

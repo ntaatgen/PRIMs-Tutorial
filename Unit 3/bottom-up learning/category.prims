@@ -1,0 +1,87 @@
+// In this task a living thing is displayed. The model has to decide whether is a plant
+// or an animal, and has to press left for an animal, and right for a plant.
+
+define task category {
+    initial-skills: (category)
+    default-activation: 1.0
+    ol: t
+    rt: -2.0
+    lf: 0.2
+    bll: 0.5 
+    default-operator-assoc: 5.0
+    default-operator-self-assoc: 0.0
+    default-inter-operator-assoc: 0.0
+    goal-operator-learning: t
+    reward: 10.0
+    beta: 0.1
+    opc: t // operator compilation
+    explore-exploit: 0.1
+}
+
+define facts {
+	(plant d x)
+	(animal y x)
+	(goat z x)
+	(pinguin u x)
+	(cabbage q x)
+	(tulip r x)
+}
+
+
+define facts {
+	(fac1 category goat animal)
+	(fac2 category pinguin animal)
+	(fac3 category cabbage plant)
+	(fac4 category tulip plant)
+	(altfac1 property goat hair)
+	(altfac2 property pinguin notfly)
+	(altfac3 property cabbage food)
+	(altfac4 property tulip mania)
+	(fca1 response animal left)
+	(fca2 response plant right)
+	(fca3 response somethingelse middle)
+	(fca4 response differentyet upper)
+	(fca5 response noguessing lower)
+	(altfca1 property animal livingthing)
+	(altfca2 property plant livingthing)
+}
+
+define init-script {
+	set-graph-title("Accuracy")
+	set-average-window(20)
+}
+
+
+define script {
+	trial-start()
+	set-goal("category",["fact-type","category"],["fact-type-two","response"])
+
+	stimuli = ["goat", "pinguin", "cabbage", "tulip"]
+	responses = ["left", "left", "right","right"]
+    pair = random(4)
+	
+    print("Testing",stimuli[pair],"and",responses[pair])
+    screen(stimuli[pair])
+    run-until-relative-time-or-action(5.0, "action")
+    ac = last-action()
+    if (ac[0] != "action") {
+		issue-reward(-1)
+		print("Out of time or Illegal action.")
+		plot-point(0)
+		data-line("0")
+	}  else {	
+		if (ac[1] == responses[pair]) {
+			issue-reward()
+			print("Correct!")
+			plot-point(1)
+			data-line("1")
+		} else {
+			issue-reward(-1)
+			print("Wrong")
+			plot-point(0)
+			data-line("0")
+		}   
+	}
+    trial-end()
+    sleep(5.0)
+}

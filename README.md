@@ -1,8 +1,9 @@
 # PRIMs-Tutorial
 
 NOTE: The tutorial is in the process of being updated for the upcoming Spring School in April 2018.
-Only Unit 1 has been updated, so take into account that other materials may be outdated.
+Units 1-3 have been updated, more will be added later.
 
+The powerpoint files still need to be updated.
 
 This is the tutorial for the PRIMs cognitive architecture.
 

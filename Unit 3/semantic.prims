@@ -1,0 +1,100 @@
+// Simple semantic model
+//
+// Make sure to load count-rev1.prims first for the iterate skill
+
+define task semantic {
+    initial-skills: (iterate-one)
+    ol: t
+    rt: -2.0
+    lf: 0.2
+    default-operator-self-assoc: 0.0
+    default-activation: 1.0
+}
+
+define skill iterate {
+//  Start iteration
+  operator start-iteration {
+   V1 <> nil  // There has to be a visual input with the starting number
+   WM1 = nil  // Imaginal should be empty
+  ==>
+   V1 -> WM1 
+   *fact-type -> RT1 
+   V1 -> RT2
+   *action -> AC1 
+   V1 -> AC2
+   }
+
+//    Iterate as long V2 does not match the final goal
+  operator iterate {
+    RT2 = WM1
+    V2 <> WM1
+   ==>
+    RT3 -> WM1
+    *fact-type -> RT1
+    RT3 -> RT2
+    *action -> AC1
+    RT3 ->AC2
+  }
+
+//    Stop when reaching final match
+  operator final {
+    V2 = WM1
+   ==>
+    *final-action -> AC1
+    *final-response -> AC2
+    nil -> G1
+  }
+
+// If the iteration fails, do the final-action on final-response-negative
+  operator final-fail {
+  	V2 <> WM1
+  	RT1 = error
+  	==>
+  	*final-action -> AC1
+  	*final-response-negative -> AC2
+	}
+}
+
+
+define action subvocalize {
+    latency: 0.2
+    noise: 0.08
+    distribution: uniform
+    output: Subvocalizing
+}
+
+define action say {
+    latency: 0.3
+    noise: 0.1
+    distribution: uniform
+    output: Saying
+}
+
+
+define facts {
+
+    (sem1  property  lion  mammal)
+    (sem2  property  mammal  animal)
+    (sem3  property  animal living-thing)
+    (sem4  property  plant living-thing)
+    (sem5  property  tulip plant)
+    (sem6  property  bird animal)
+    (sem7  property  tweety bird)
+    (sem8  property  robin bird)
+
+}
+
+
+define script {
+	instantiate-skill("iterate","iterate-one",["fact-type","property"],["action","sub-vocalize"],["final-action","say"], ["final-response","yes"],["final-response-negative","no"])
+    pairs = [["lion","living-thing","yes"],["tulip","animal","no"],["mammal","living-thing","yes"],["lion","plant","no"]]
+    pairno = random(length(pairs))
+    pair = pairs[pairno]
+    print("Is",pair[0],"a",pair[1],"?")
+    screen(pair[0],pair[1])
+    run-until-action("say")
+    issue-reward()
+    trial-end()
+}
+
+

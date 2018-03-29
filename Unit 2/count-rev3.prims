@@ -1,0 +1,125 @@
+// More general version of count
+
+define task count {
+  initial-skills: (read-one)
+  default-activation: 1.0 // All chunks defined in this model receive a fixed baselevel activation of 1.0
+  ol: t
+  rt: -2.0
+  lf: 0.2
+  egs: 0.05
+  retrieval-reinforces: t
+}
+
+define skill read {
+	operator read-for-two-items {
+		V1 <> nil
+		V2 <> nil
+		WM1 = nil
+	==>
+		V1 -> WM1
+		V2 -> WM2
+	}
+	operator switch-to-next-skill {
+		V1 = WM1
+	==>
+		*next-skill -> G1
+	}
+}
+
+define skill iterate {
+//  Start iteration
+  operator start-iteration {
+   WM3 = nil  // Slot we use for iterator is empty
+  ==>
+   WM1 -> WM3	
+   *sub-skill -> G1
+   }
+
+  operator do-sub-skill {
+   RT1 = *fact-type
+   ==>
+   RT3 -> WM3
+   *sub-skill -> G1
+  }
+
+//    Iterate as long WM2 does not match the final goal
+  operator retrieve-next {
+    RT1 = nil
+    WM3 <> nil
+    WM2 <> WM3
+   ==>
+    *fact-type -> RT1
+    WM3 -> RT2
+  }
+
+//    Stop when reaching final match
+  operator final {
+    WM2 = WM3
+    RT1 = nil
+   ==>
+    *final-action-skill -> G1
+  }
+
+// If the iteration fails, do the final-action on final-response-negative
+  operator final-fail {
+  	WM2 <> WM3
+  	RT1 = error
+  	==>
+  	*fail-skill -> G1
+	}
+}
+
+define skill do-action {
+	operator do-action-on-WM3 {
+		WM3 <> nil
+	==>
+		*action -> AC1
+		WM3 -> AC2
+		*main-skill -> G1
+	}
+}
+
+define skill respond {
+	operator carry-out-action {
+		G1 <> nil // Operators require at least one condition
+		==>
+		*action -> AC1
+		*arg -> AC2
+		nil -> G1
+	}
+}
+
+define facts {
+    (cf1 count-fact  one  two)
+    (cf2 count-fact  two  three)
+    (cf3 count-fact  three  four)
+    (cf4 count-fact  four  five)
+    (cf5 count-fact  five  six)
+    (cf6 count-fact six seven)
+    (cf7 count-fact seven eight)
+    (cf8 count-fact eight nine)
+    (cg9 count-fact nine ten)
+}
+
+define action say {
+  latency: 0.3
+  noise: 0.1
+  distribution: uniform
+  output: Saying
+}
+
+define script {
+	instantiate-skill("read","read-one", ["next-skill","iterate-one"])
+	instantiate-skill("iterate", "iterate-one", ["sub-skill", "do-action-say"], ["fact-type", "count-fact"],["final-action-skill", "respond-one"])
+	instantiate-skill("do-action","do-action-say",["action", "say"], ["main-skill", "iterate-one"])
+	instantiate-skill("respond", "respond-one", ["action","say"],["arg","stop"])
+    digits = ["one","two","three","four","five","six","seven",
+        "eight","nine","ten"]
+    start = random(3)
+    end = start + 1 + random(3)
+    print("Counting from",digits[start],"to",digits[end])
+    screen(digits[start],digits[end])
+    run-until-action("say","stop")
+    issue-reward()
+    trial-end()
+}

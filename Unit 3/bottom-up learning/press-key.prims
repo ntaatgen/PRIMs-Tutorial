@@ -1,0 +1,58 @@
+// In this example the model has to learn to switch from one goal to another
+// It first has to perceive what finger needs to be pressed, then has to switch to the
+// "press-key" skill, and then press the key.
+
+define task press-key {
+    initial-skills: (perceive)
+    default-activation: 1.0
+    ol: t
+    rt: -2.0
+    lf: 0.2
+    bll: 0.5 
+    default-operator-self-assoc: 0.0
+    default-operator-assoc: 5.0
+    goal-operator-learning: t
+    retrieval-activation: 2.0
+    reward: 5.0
+    beta: 0.1
+    opc: t
+    explore-exploit: 0.5
+}
+
+define init-script {
+	set-graph-title("Accuracy")
+	set-average-window(20)
+}
+
+define script {
+	trial-start()
+	responses = ["thumb", "ring", "pinkie"]
+    finger = random(3)
+	set-goal("perceive",["next-goal-type","press-key"])
+    print("Testing",responses[finger])
+    screen(responses[finger])
+    run-until-relative-time-or-action(5.0, "action")
+	print(get-buffer-slot("goal","slot2"))
+    ac = last-action()
+    if (ac[0] != "action") {
+		issue-reward(-0.5)
+		print("Out of time or Illegal action.")
+		plot-point(0)
+		data-line("0")
+	}  else {	
+		if ((ac[1] == responses[finger]) && (get-buffer-slot("goal","slot2") == "press-key")) {
+			issue-reward()
+			print("Correct!")
+			plot-point(1)
+			data-line("1")
+
+		} else {
+			issue-reward(-1)
+			print("Wrong")
+			plot-point(0)
+			data-line("0")
+		}   
+	}
+    trial-end()
+    sleep(5.0)
+}

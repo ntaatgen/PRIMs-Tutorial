@@ -1,0 +1,187 @@
+define task primitives {
+    initial-skills: (nogoal)
+    default-activation: 1.0
+    ol: t
+    rt: -2.0
+    lf: 0.2
+    bll: 0.5
+    default-operator-self-assoc: -2.0
+    goal-operator-learning: t
+    default-inter-operator-assoc: 0.0
+    reward: 10.0
+    beta: 0.1
+}
+
+
+define goal primitives {
+
+
+operator V1toRT1 {
+	V1 <> nil
+==>
+    V1 -> RT1
+    nil -> V1
+}
+
+operator V1toRT2 {
+	V1 <> nil
+==>
+    V1 -> RT2
+    nil -> V1
+}
+
+operator V2toRT1 {
+	V2 <> nil
+==>
+    V2 -> RT1
+    nil -> V2
+}
+
+operator V2toRT2 {
+	V2 <> nil
+==>
+    V2 -> RT2
+    nil -> V2
+}
+
+
+operator RT2toAC1 {
+	RT2 <> nil
+==>
+	action -> AC1
+	RT2 -> AC2
+}
+
+operator RT1toAC1 {
+	RT1 <> nil
+==>
+	action -> AC1
+	RT1 -> AC2
+}
+
+operator RT2toRT1 {
+	RT2 <> nil
+==>
+	RT2 -> RT1
+}
+
+operator RT3toRT2 {
+	RT3 <> nil
+==>
+	RT3 -> RT2
+}
+	
+operator V1toWM1 {
+	V1 <> nil
+	WM1 = nil
+==>
+   V1 -> WM1
+   nil -> V1
+}
+
+operator V2toWM1 {
+	V2 <> nil
+	WM1 = nil
+==>
+   V2 -> WM1
+   nil -> V2
+}
+
+operator WM1toRT1 {
+	RT1 = nil
+	WM1 <> nil
+==>
+    WM1 -> RT1
+//    nil -> WM1
+}
+
+operator WM1toRT2 {
+	RT2 = nil
+	WM1 <> nil
+==>
+    WM1 -> RT2
+//    nil -> WM1
+}
+
+operator WM1toAC1 {
+	WM1 <> nil
+==>
+	action -> AC1
+    WM1 -> AC2
+//    nil -> WM1
+}
+
+operator RT2toWM1 {
+	RT2 <> nil
+	WM1 = nil
+==>
+	RT2 -> WM1
+}
+
+operator C1toRT1 {
+	G1 <> nil
+==>
+	*fact-type -> RT1
+}
+
+operator C1altToRT1 {
+	G1 <> nil
+==>
+	*fact-type-two -> RT1
+}
+
+operator RT3toWM1 {
+	RT3 <> nil
+	WM1 = nil
+==>
+	RT3 -> WM1
+}
+
+operator RT1equalC1 {
+	RT1 = *fact-type
+==>
+}
+
+operator RT1equalC1alt {
+	RT1 = *fact-type-two
+==>
+}
+
+
+operator RT3toAC1 {
+	RT3 <> nil
+==>
+	action -> AC1
+	RT3 -> AC2
+}
+
+// Operators that implement multiple states
+
+operator stage1 {
+	G2 = state-one
+	==>
+	state-two -> G2
+}
+	
+operator stage2 {
+	G2 = state-two
+	==>
+	state-three -> G2
+}
+
+// Operators that model a transition to a new goal
+
+// We keep the old goal in G1 to ensure credit assignment is maintained
+
+operator next-goal {
+	G1 <> nil
+	G2 = nil
+==>
+	*next-goal-type -> G2
+}
+
+}
+
+define script {
+    trial-end()
+}
