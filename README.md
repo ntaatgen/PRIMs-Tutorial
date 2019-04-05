@@ -1,6 +1,6 @@
 # PRIMs-Tutorial
 
-NOTE: The tutorial is in the process of being updated for the upcoming Spring School in April 2018.
+NOTE: The tutorial is in the process of being updated for the upcoming Spring School in April 2019.
 Units 1-3 have been updated, more will be added later.
 
 The powerpoint files still need to be updated.
