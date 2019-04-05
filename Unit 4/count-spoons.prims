@@ -4,7 +4,6 @@
 define task count-spoons {
     initial-goals: (add-all count-goal determine-attribute)
     goals: (count-goal determine-attribute)
-    imaginal-autoclear: nil
     rt: -2.0
     lf: 0.3
     ans: 0.1

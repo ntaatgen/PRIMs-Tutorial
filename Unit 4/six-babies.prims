@@ -4,7 +4,6 @@
 define task six-babies {
     initial-goals: (find-value count-goal include-all)
     goals: (count-goal include-all)
-    imaginal-autoclear: nil
     rt: -2.0
     lf: 0.3
     ans: 0.1

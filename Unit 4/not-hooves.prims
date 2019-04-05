@@ -5,7 +5,6 @@
 define task not-hooves {
     initial-goals: (find-all-values negate retrieve-attribute)
     goals: (retrieve-attribute)
-    imaginal-autoclear: nil
     rt: -2.0
     lf: 0.3
     ans: 0.1

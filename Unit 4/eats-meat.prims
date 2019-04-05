@@ -2,14 +2,11 @@
 // horse, cow, wolf
 
 define task eats-meat {
-    initial-goals: (find-value retrieve-attribute)
-    goals: (retrieve-attribute)
-    imaginal-autoclear: nil
+    initial-skills: (find-value retrieve-attribute)
     rt: -2.0
     lf: 0.3
     ans: 0.1
     default-activation: 1.0
-    references: (container item-type subtask subsubtask action target-value attribute subtask-type)
 }
 
 
@@ -21,44 +18,44 @@ define goal find-value {
         >>V3  // shift to the first container (bird)
         find-target -> WM1
         >>WM4 // this creates a new chunk that is placed in WM4, and shifts focus to that chunk
-        subtask-type -> WM1
+        *subtask-type -> WM1
         push-goal -> AC1
-        subtask -> AC2
+        *subtask -> AC2
     }
 
     operator result-is-target {
         WM1 = find-target
         >>WM4
-        WM2 = target-value
+        WM2 = *target-value
         WM<<
     ==>
-		action -> AC1
+		*action -> AC1
 		V0 -> AC2
     }
 	
 	operator result-is-not-target-move-next {
         WM1 = find-target
         >>WM4
-        WM2 <> target-value 
+        WM2 <> *target-value 
         WM<<
         V2 <> nil // there is a next 
     ==>
     	>>V2
     	nil -> WM4
     	>>WM4
-        subtask-type -> WM1
+        *subtask-type -> WM1
         push-goal -> AC1
-        subtask -> AC2
+        *subtask -> AC2
 	}
 	
 	operator result-is-not-target-all-done {
         WM1 = find-target
         >>WM4
-        WM2 <> target-value 
+        WM2 <> *target-value 
         WM<<
         V2 = nil // there is no next 
 	==>
-		action -> AC1
+		*action -> AC1
 		stop -> AC2
 	}	
 }
@@ -70,7 +67,7 @@ define goal retrieve-attribute {
 	==>
 		has-attribute -> RT1
 		V0 -> RT2
-		attribute -> RT3
+		*attribute -> RT3
 	}
 	
 	operator return-attribute {
