@@ -1,0 +1,82 @@
+define task list-learning {
+	initial-skills: (read-item)
+	default-activation: 0.0
+}
+
+define facts {
+	(cf0 count-fact zero one)
+	(cf1 count-fact one two)
+	(cf2 count-fact two three)
+	(cf3 count-fact three four)
+	(cf4 count-fact four five)
+}
+
+define skill read {
+	operator read-item-type {
+		V1 = *item-type
+		V2 <> nil
+	==>
+		V2 -> WM1
+		nil -> V1
+		*next-skill -> G1
+	}
+	
+	operator read {
+		V1 = nil
+	==>
+		read -> AC1
+	}
+	
+	operator done {
+		V1 <> *item-type
+	==>
+		done -> AC1
+		}
+}
+
+define skill remember {
+	operator first-item {
+		WM1 <> nil
+		WM2 = nil
+		RT1 = nil
+	==>
+		one -> WM2
+		G0 -> WM3
+		count-fact -> RT1
+		WM2 -> RT2
+	}
+	
+	operator store-new-count {
+		WM2 = RT2
+	==>
+		nil -> WM0
+		RT3 -> WM2
+		*next-skill -> G1
+	}
+	
+	operator next-item {
+		WM1 <> nil
+		WM2 <> nil
+		RT1 = nil
+	==>
+		G0 -> WM3
+		count-fact -> RT1
+		WM2 -> RT2
+	}
+	
+}
+
+
+
+define script {
+	instantiate-skill("read","read-item", ["next-skill","remember-item"], ["item-type","item"] )
+	instantiate-skill("remember","remember-item", ["next-skill", "read-item"])
+	list = ["T", "A", "R"]
+	for item in list {
+		screen("item",item)
+		run-until-action("read")
+	}
+	screen("done")
+	run-until-action("done")
+	end-trial()
+}
