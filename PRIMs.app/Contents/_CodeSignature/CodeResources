@@ -10,35 +10,59 @@
 		</data>
 		<key>Resources/Assets.car</key>
 		<data>
-		Lo+0uVUGTFfnujF4mR/S/9wvHFs=
+		/PS7tdh1Mm2QkpFu9USVEvv1lR8=
 		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/6hi-wd-EyU-view-tad-pG-8wL.nib</key>
+		<key>Resources/Base.lproj/Main.storyboardc/6hi-wd-EyU-view-tad-pG-8wL.nib/keyedobjects-101300.nib</key>
 		<data>
-		r6ySooMJ0LSbH24gHqm98fVt308=
+		f8RX7t3qa9QhCKXnpu63L9uKxiw=
 		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/Gag-3T-PMl-view-0ST-E5-sWl.nib</key>
+		<key>Resources/Base.lproj/Main.storyboardc/6hi-wd-EyU-view-tad-pG-8wL.nib/keyedobjects.nib</key>
+		<data>
+		9tMVr8hpDQXOzZ2grytPbcZtHfg=
+		</data>
+		<key>Resources/Base.lproj/Main.storyboardc/Gag-3T-PMl-view-0ST-E5-sWl.nib/keyedobjects-101300.nib</key>
+		<data>
+		MXUS5JcfevAi1cUsnEGiQMlZtFQ=
+		</data>
+		<key>Resources/Base.lproj/Main.storyboardc/Gag-3T-PMl-view-0ST-E5-sWl.nib/keyedobjects.nib</key>
 		<data>
 		0pQU35aMeB4zzY9Fwv/fX8SaYaQ=
 		</data>
 		<key>Resources/Base.lproj/Main.storyboardc/Info.plist</key>
 		<data>
-		H6CB0CK/Lqk9l9Xwnd6cH4rK6jI=
+		sGpOYEm3rGPWm6AZ1hXUBQtNVEY=
 		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
+		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib/keyedobjects-101300.nib</key>
 		<data>
-		4PcyQSSYFZ8OepjhONEScRevjhc=
+		/DzKYox74kGm2vjZxQgkrDbchyQ=
 		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib</key>
+		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib/keyedobjects.nib</key>
 		<data>
-		86jhWGLLb2f5dlhnRTYKH1y9lYw=
+		GbrK4try9mbgKh2iUcLFIhX7ABU=
 		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/PRIMs.nib</key>
+		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects-101300.nib</key>
 		<data>
-		sXyckFrS2G6lDanY3MNbOL2L4sU=
+		CLPzl4vSirOzuwMpC+XNfPlaKXQ=
 		</data>
-		<key>Resources/Base.lproj/Main.storyboardc/chunkView.nib</key>
+		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects.nib</key>
 		<data>
-		QL7FpAWaFYm28hLcW7lM0+689Cg=
+		9pmB2zhDrCK9bvcHcc7OUYfp77Q=
+		</data>
+		<key>Resources/Base.lproj/Main.storyboardc/PRIMs.nib/keyedobjects-101300.nib</key>
+		<data>
+		/sGJCBbPZVhq8Nq6/GcmQwIamMs=
+		</data>
+		<key>Resources/Base.lproj/Main.storyboardc/PRIMs.nib/keyedobjects.nib</key>
+		<data>
+		DKTEzpW+XeazgxzOsMrcPJcuBmo=
+		</data>
+		<key>Resources/Base.lproj/Main.storyboardc/chunkView.nib/keyedobjects-101300.nib</key>
+		<data>
+		WmhEKA7QHSfDo/0LpORFQGLGrN0=
+		</data>
+		<key>Resources/Base.lproj/Main.storyboardc/chunkView.nib/keyedobjects.nib</key>
+		<data>
+		H643BZKCdMk6/6P9N/6YfZtQ4EU=
 		</data>
 		<key>Resources/PrimsDocumentIcon.icns</key>
 		<data>
@@ -55,172 +79,172 @@
 		<dict>
 			<key>cdhash</key>
 			<data>
-			w8DNC0Lp/3phzyos8N2uLTMxEIc=
+			LSU3/oxoTOjuJsHtkH4FS+/KwRI=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"9789d3dcafe282ec7fc9a5aa9f4e454e4ff857eb" or cdhash H"c3c0cd0b42e9ff7a61cf2a2cf0ddae2d33311087" or cdhash H"af49f94b86ade55306bd91724a6512a88e2ccf80" or cdhash H"0c7f80b57e96266986148a2d38d278df6cb06e51"</string>
+			<string>anchor apple generic and identifier "com.dcg.Charts" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftAppKit.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			/OmwGRbORcnNjnoLmSHJ5YPdYTA=
+			Kj1e7NgekokDe0LyWkgbU1269zw=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"93e4a579dc797d359af753c1d9875e1e368a7be4" or cdhash H"fce9b01916ce45c9cd8e7a0b9921c9e583dd6130"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftAppKit" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftCloudKit.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			cGMS9W0rJYpdS8WXuA421Jk2maI=
+			weZHrZX9F5axxXJuyC1ODlZQG3g=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"a2dc3fd1fe2b3843229d2363867f05b0875ca3d8" or cdhash H"706312f56d2b258a5d4bc597b80e36d4993699a2"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftCloudKit" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftContacts.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			Rh0jk2VJ+5Biz17YKqRNm888q5w=
+			V+J6TxE1t7iHEWBgQ5G57B6Wl74=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"bf8c68eb41ce78313f7734ae842c07aa3c428faf" or cdhash H"461d23936549fb9062cf5ed82aa44d9bcf3cab9c"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftContacts" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftCore.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			dqeKQzezqkqNieRSKURxOkYAlfs=
+			X2EEtcv2EuM1e0DcGjPNAAckUAM=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"d8f6c9a79d9268ed6bf4a2cfdf1e18f65bbe3936" or cdhash H"76a78a4337b3aa4a8d89e4522944713a460095fb"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftCore" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftCoreData.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			3WuVQR+oLXgvxCCkTazRNrUc6BY=
+			BcRFNr515usrSbmSvwG3w5VbSRs=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"cb7d87eec1e91502bc330135c3cf2af37c557989" or cdhash H"dd6b95411fa82d782fc420a44dacd136b51ce816"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftCoreData" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftCoreFoundation.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			9FhzxU6Cj8t+azK/JCsBHkbHPsQ=
+			AaFjVM0BA+iF+leBWmMD3UeDEzs=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"4a62b40f83e91a952f0821fd2e62d33d7d63784c" or cdhash H"f45873c54e828fcb7e6b32bf242b011e46c73ec4"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftCoreFoundation" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftCoreGraphics.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			aNuElvmFWZFgDIeVFXBqVcgBBXk=
+			L4wLnlBhiRCZYOkbI8EfhKRBmK0=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"1317210089af658ce9dc08ac4da39ffb997028ae" or cdhash H"68db8496f9855991600c879515706a55c8010579"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftCoreGraphics" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftCoreImage.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			rdQ3znZuQZojLVpS7s74inCwTf4=
+			oAl1WR898EUy1Chelkp0ynDLFnE=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"2ccd604ba6b9b6b5bb44800fe65a6725156de9ca" or cdhash H"add437ce766e419a232d5a52eecef88a70b04dfe"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftCoreImage" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftCoreLocation.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			eau/a2fXhgOzH/OX9TN/kd+vRh0=
+			1fksrKefS48VkPJn2X4eSC8D9g4=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"bb4cb99b7772be8c5fa7561728df32b22154a05f" or cdhash H"79abbf6b67d78603b31ff397f5337f91dfaf461d"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftCoreLocation" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftDarwin.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			J8aEbcH96rf3olM1v8wJQms7xaI=
+			tsU3j51DHB67Oby8TrGhDpMVMJU=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"300b03492cc2be4543d5f2be1e06909f387af72d" or cdhash H"27c6846dc1fdeab7f7a25335bfcc09426b3bc5a2"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftDarwin" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftDispatch.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			H1Vdy5eFVLXgr7PXAMrPSmBOwqU=
+			ogijbfXM/SBmZ27/ikQgScC7S5U=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"83423a4dbcbcb15a8b57dcb655ea0718258599f6" or cdhash H"1f555dcb978554b5e0afb3d700cacf4a604ec2a5"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftDispatch" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftFoundation.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			vXwKUYrafAE4gkcluwQSaiYHnKc=
+			uEayZ65Wc9xlvgNQzkCv3gdrdrI=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"fe12fe0baad9538e21462200076f1510b4d7140b" or cdhash H"bd7c0a518ada7c0138824725bb04126a26079ca7"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftFoundation" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftIOKit.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			qcMlAtJuSYqhv7GlkBdTNkAY3/8=
+			D1PCxOFB7sIEAo2mlfYnJaSH5yQ=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"c1e542c0c8c50d88d2d8d61464c982746b0d9b51" or cdhash H"a9c32502d26e498aa1bfb1a5901753364018dfff"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftIOKit" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftMetal.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			5nmAcP26pCsQ1jicIjvDevc6WQ8=
+			8aFFKD0TUtzSY8M5gbVhCL2EGU4=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"6769e26c565b6df559c79f30db5b252af146bff6" or cdhash H"e6798070fdbaa42b10d6389c223bc37af73a590f"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftMetal" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftObjectiveC.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			R4P87y0EKzf54v8gVXvomYSANRs=
+			X0UxNwIE+bnBwniKjRKYAMECfgM=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"cfc8bff5f33ca8e6cc55b76c42a45acbadc9a6f8" or cdhash H"4783fcef2d042b37f9e2ff20557be8998480351b"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftObjectiveC" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftQuartzCore.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			bknY2ZZYsDmx9EFjrB7uvTb2X8o=
+			G1L5M9FnvasRQriLjSP9zNn+mjE=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"bd28786e3525484958edfb89610808086852dbbe" or cdhash H"6e49d8d99658b039b1f44163ac1eeebd36f65fca"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftQuartzCore" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftXPC.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			HDW7fmnNnx/9boh/yF53ZFWe8sw=
+			H5V+1YTG6Qs5W4ks02MWLt9TlqY=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"5adfbeea44347dbcdfebca089f791cfd9680133c" or cdhash H"1c35bb7e69cd9f1ffd6e887fc85e7764559ef2cc"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftXPC" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Frameworks/libswiftos.dylib</key>
 		<dict>
 			<key>cdhash</key>
 			<data>
-			Twy7QT5U0caIVWxYQhNywz5oSo4=
+			y3AoHg40WvR4/3SBMR+foyszbhU=
 			</data>
 			<key>requirement</key>
-			<string>cdhash H"bf8a15081175ba4289f2a4455dcf9d85f4d2a4d9" or cdhash H"4f0cbb413e54d1c688556c58421372c33e684a8e"</string>
+			<string>anchor apple generic and identifier "com.apple.dt.runtime.swiftos" and (certificate leaf[field.1.2.840.113635.100.6.1.9] /* exists */ or certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = YD3HPRU5U8)</string>
 		</dict>
 		<key>Resources/AppIcon.icns</key>
 		<dict>
@@ -237,25 +261,47 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Lo+0uVUGTFfnujF4mR/S/9wvHFs=
+			/PS7tdh1Mm2QkpFu9USVEvv1lR8=
 			</data>
 			<key>hash2</key>
 			<data>
-			fRFCUGW5U3AaL1SJ36mUSf/iAZe4/Mr2+Edb141Juio=
+			QXesuQECKNyo8GK4QFGWWkZNi0RmByGIXJbrx6Cge58=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/6hi-wd-EyU-view-tad-pG-8wL.nib</key>
+		<key>Resources/Base.lproj/Main.storyboardc/6hi-wd-EyU-view-tad-pG-8wL.nib/keyedobjects-101300.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			r6ySooMJ0LSbH24gHqm98fVt308=
+			f8RX7t3qa9QhCKXnpu63L9uKxiw=
 			</data>
 			<key>hash2</key>
 			<data>
-			JA+dl534ZoDHeOBnwSYzdYAyn1TWfCllB6i8BL99WRE=
+			4tNpFLD43FcWFSpBw3k5eKTQ5Uyc+kF3AiS9BGCLkpg=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/Gag-3T-PMl-view-0ST-E5-sWl.nib</key>
+		<key>Resources/Base.lproj/Main.storyboardc/6hi-wd-EyU-view-tad-pG-8wL.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			9tMVr8hpDQXOzZ2grytPbcZtHfg=
+			</data>
+			<key>hash2</key>
+			<data>
+			i69oodncQ0bSBThD2Hb5wFHrRo9CkG7O6kL0SeKkgrg=
+			</data>
+		</dict>
+		<key>Resources/Base.lproj/Main.storyboardc/Gag-3T-PMl-view-0ST-E5-sWl.nib/keyedobjects-101300.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			MXUS5JcfevAi1cUsnEGiQMlZtFQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			wvLTkf7GvS/nvjRfxnuxG4K2pJ8drGa1pYr72BrCOgw=
+			</data>
+		</dict>
+		<key>Resources/Base.lproj/Main.storyboardc/Gag-3T-PMl-view-0ST-E5-sWl.nib/keyedobjects.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
@@ -270,55 +316,99 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			H6CB0CK/Lqk9l9Xwnd6cH4rK6jI=
+			sGpOYEm3rGPWm6AZ1hXUBQtNVEY=
 			</data>
 			<key>hash2</key>
 			<data>
-			8ITJOTbql0ibLtCXN1sElqn7Y44k2Yqpk/s6SUFSXsc=
+			dCvfdi7c73XHRQIYh69aHnloc/JsPd8rDGhZQ9s6quk=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib</key>
+		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib/keyedobjects-101300.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			4PcyQSSYFZ8OepjhONEScRevjhc=
+			/DzKYox74kGm2vjZxQgkrDbchyQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			34iTSmEYERmnpxiYzVHpk+EZy8fo1EojWJWQxl6VuTE=
+			q7x/5mZBJgVGz8NasETs/FEAR9s8gfl3CIMcFruN7LU=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib</key>
+		<key>Resources/Base.lproj/Main.storyboardc/MainMenu.nib/keyedobjects.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			86jhWGLLb2f5dlhnRTYKH1y9lYw=
+			GbrK4try9mbgKh2iUcLFIhX7ABU=
 			</data>
 			<key>hash2</key>
 			<data>
-			TCLBlDIWpNqq5Yiy6GVzWI+MDT5OIMElco9EK5+Urg8=
+			8/KbQYtGKaLk/PKXZmmiBbGFC4ov9gZjPxLnsJBzess=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/PRIMs.nib</key>
+		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects-101300.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			sXyckFrS2G6lDanY3MNbOL2L4sU=
+			CLPzl4vSirOzuwMpC+XNfPlaKXQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			vqNtKcMRzRtzaDQTCttyrJLg6ndpzyoicMbhM9WsmUs=
+			4vEX3GniIZKar3YbtztdJmx5bak27V2LF0uPu81qP+E=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/Main.storyboardc/chunkView.nib</key>
+		<key>Resources/Base.lproj/Main.storyboardc/NSWindowController-B8D-0N-5wS.nib/keyedobjects.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			QL7FpAWaFYm28hLcW7lM0+689Cg=
+			9pmB2zhDrCK9bvcHcc7OUYfp77Q=
 			</data>
 			<key>hash2</key>
 			<data>
-			pfjSMA19eomnHh6bD539YWlLER0GFBt66FDLwcL/L6g=
+			9/k3C0j1jr3bZsDLbOvJ/m0HC3eAFbNfaO3d1tdNCD0=
+			</data>
+		</dict>
+		<key>Resources/Base.lproj/Main.storyboardc/PRIMs.nib/keyedobjects-101300.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			/sGJCBbPZVhq8Nq6/GcmQwIamMs=
+			</data>
+			<key>hash2</key>
+			<data>
+			cfPugbgzXJOIs9ORQ5y3khduPYoklIJwWFw+2BhtpD8=
+			</data>
+		</dict>
+		<key>Resources/Base.lproj/Main.storyboardc/PRIMs.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			DKTEzpW+XeazgxzOsMrcPJcuBmo=
+			</data>
+			<key>hash2</key>
+			<data>
+			W1O9mo5Tyv4lB4ABlGjpuLsT740SA5mxKXDFC1A+WXY=
+			</data>
+		</dict>
+		<key>Resources/Base.lproj/Main.storyboardc/chunkView.nib/keyedobjects-101300.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			WmhEKA7QHSfDo/0LpORFQGLGrN0=
+			</data>
+			<key>hash2</key>
+			<data>
+			/Obj1mJ0P6yQ7Hm6KaSAbNcuItQlp1ZWEOywIZ9tdc0=
+			</data>
+		</dict>
+		<key>Resources/Base.lproj/Main.storyboardc/chunkView.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			H643BZKCdMk6/6P9N/6YfZtQ4EU=
+			</data>
+			<key>hash2</key>
+			<data>
+			ox4blMr4fur06U8AS/YzzEIDbNs6O68b/2UqyYm0+G8=
 			</data>
 		</dict>
 		<key>Resources/PrimsDocumentIcon.icns</key>
