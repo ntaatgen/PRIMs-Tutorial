@@ -1,0 +1,65 @@
+// Simple recall task: the model is shown a stimulus, has to store it in WM
+// and then hs to report it.
+
+define task recall {
+    initial-goals: (recall)
+    goals: (primitives)
+    default-activation: 1.0
+    ol: t
+    rt: -2.0
+    lf: 0.2
+    bll: 0.99 // very fast decay
+    default-operator-self-assoc: 0.0
+    context-operator-learning: t
+    ga: 1.0
+    input-activation: 1.0
+    wm-activation: 1.0
+    retrieval-activation: 2.0
+    reward: 10.0
+    beta: 0.1
+}
+
+define facts {
+	(vanilla one x)
+	(thumb two x)
+	(ice three x)
+	(ring four x)
+	(paper five x)
+	(pinkie six x)
+}
+
+
+define init-script {
+	set-graph-title("Accuracy")
+	set-average-window(5)
+}
+
+define script {
+	trial-start()
+	stimuli = ["vanilla", "ice", "paper"]
+    stimulus = stimuli[random(3)]
+	
+    print("Testing",stimulus)
+    screen(stimulus)
+    run-step()
+    screen("nil")
+    run-until-relative-time-or-action(5.0, "action")
+    ac = last-action()
+    if (ac[0] != "action") {
+		issue-reward(-1)
+		print("Out of time or Illegal action.")
+		plot-point(0)
+	}  else {	
+		if (ac[1] == stimulus) {
+			issue-reward()
+			print("Correct!")
+			plot-point(1)
+		} else {
+			issue-reward(-1)
+			print("Wrong")
+			plot-point(0)
+		}   
+	}
+    trial-end()
+    sleep(5.0)
+}

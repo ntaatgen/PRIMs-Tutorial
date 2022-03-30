@@ -1,11 +1,12 @@
 // More general version of count
 
 define task count {
-  initial-skills: (read-one)
+  initial-skills: (read)
   default-activation: 1.0 // All chunks defined in this model receive a fixed baselevel activation of 1.0
   ol: t
   rt: -2.0
   lf: 0.2
+  default-operator-self-assoc: 0.0
   egs: 0.05
   retrieval-reinforces: t
 }
@@ -79,12 +80,13 @@ define skill do-action {
 	}
 }
 
+
 define skill respond {
 	operator carry-out-action {
 		G1 <> nil // Operators require at least one condition
 		==>
-		*action -> AC1
-		*arg -> AC2
+		*respond-action -> AC1
+		*respond-arg -> AC2
 		nil -> G1
 	}
 }
@@ -109,10 +111,15 @@ define action say {
 }
 
 define script {
-	instantiate-skill("read","read-one", ["next-skill","iterate-one"])
-	instantiate-skill("iterate", "iterate-one", ["sub-skill", "do-action-say"], ["fact-type", "count-fact"],["final-action-skill", "respond-one"])
-	instantiate-skill("do-action","do-action-say",["action", "say"], ["main-skill", "iterate-one"])
-	instantiate-skill("respond", "respond-one", ["action","say"],["arg","stop"])
+	add-binding("next-skill","iterate")
+	add-binding("action","say")
+	add-binding("fact-type","count-fact")
+	add-binding("final-action-skill","respond")
+	add-binding("respond-action","say")
+	add-binding("respond-arg","stop")
+	add-binding("sub-skill","do-action")
+	add-binding("action","say")
+	add-binding("main-skill","iterate")
     digits = ["one","two","three","four","five","six","seven",
         "eight","nine","ten"]
     start = random(3)
@@ -123,3 +130,4 @@ define script {
     issue-reward()
     trial-end()
 }
+

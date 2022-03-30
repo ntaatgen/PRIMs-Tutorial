@@ -2,7 +2,7 @@
 // Adapatation of original PR model
 
 define task stroop {
-    initial-skills: (stroop-1)
+    initial-skills: (stroop)
     lf: 0.2
     egs: 0.05
     rt: -3.0
@@ -15,7 +15,6 @@ define task stroop {
     operator-bll: t
     beta: 0.05
     reward: 10.0
-    references: (prepare)
 }
 
 define skill stroop {
@@ -121,7 +120,7 @@ define script {
 			  ["blue-color","blue-word","consistent"],
 			  ["red-color","blue-word","conflict"],
 			  ["blue-color","red-word","conflict"]]
-	instantiate-skill("stroop","stroop-1",["prepare","focus-color"])
+	add-binding("prepare","focus-color")
 	for trial in trials {
 		set-data-file-field(1, trial[2])
 		print("Presenting", trial[2], "with", trial[0], "and", trial[1])

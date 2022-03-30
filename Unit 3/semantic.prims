@@ -3,7 +3,7 @@
 // Make sure to load count-rev1.prims first for the iterate skill
 
 define task semantic {
-    initial-skills: (iterate-one)
+    initial-skills: (iterate)
     ol: t
     rt: -2.0
     lf: 0.2
@@ -46,6 +46,7 @@ define skill iterate {
   }
 
 // If the iteration fails, do the final-action on final-response-negative
+// This should never happen for this model
   operator final-fail {
   	V2 <> WM1
   	RT1 = error
@@ -54,7 +55,6 @@ define skill iterate {
   	*final-response-negative -> AC2
 	}
 }
-
 
 define action subvocalize {
     latency: 0.2
@@ -86,8 +86,12 @@ define facts {
 
 
 define script {
-	instantiate-skill("iterate","iterate-one",["fact-type","property"],["action","sub-vocalize"],["final-action","say"], ["final-response","yes"],["final-response-negative","no"])
-    pairs = [["lion","living-thing","yes"],["tulip","animal","no"],["mammal","living-thing","yes"],["lion","plant","no"]]
+	add-binding("fact-type","property")
+	add-binding("action","sub-vocalize")
+	add-binding("final-action","say")
+	add-binding("final-response","yes")
+	add-binding("final-response-negative","no")    
+	pairs = [["lion","living-thing","yes"],["tulip","animal","no"],["mammal","living-thing","yes"],["lion","plant","no"]]
     pairno = random(length(pairs))
     pair = pairs[pairno]
     print("Is",pair[0],"a",pair[1],"?")

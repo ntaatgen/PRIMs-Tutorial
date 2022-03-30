@@ -1,7 +1,7 @@
 // More general version of count
 
 define task count {
-  initial-skills: (iterate-one)
+  initial-skills: (iterate)
   default-activation: 1.0 // All chunks defined in this model receive a fixed baselevel activation of 1.0
   ol: t
   rt: -2.0
@@ -47,6 +47,7 @@ define skill iterate {
   }
 
 // If the iteration fails, do the final-action on final-response-negative
+// This should never happen for this model
   operator final-fail {
   	V2 <> WM1
   	RT1 = error
@@ -76,7 +77,10 @@ define action say {
 }
 
 define script {
-	instantiate-skill("iterate", "iterate-one", ["fact-type", "count-fact"],["action", "say"], ["final-action", "say"], ["final-response", "stop"])
+	add-binding("fact-type","count-fact")
+	add-binding("action","say")
+	add-binding("final-action","say")
+	add-binding("final-response","stop")
     digits = ["one","two","three","four","five","six","seven",
         "eight","nine","ten"]
     start = random(3)

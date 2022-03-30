@@ -1,0 +1,90 @@
+// Simple paired associatives task
+// Model is shown a word and has to press the right finger
+
+define task paired-associate{
+    initial-skills: (paired-associate)
+    default-activation: 1.0
+    ol: t
+    rt: -2.0
+    lf: 0.2
+    bll: 0.5 
+    default-operator-self-assoc: 0.0
+    default-operator-assoc: 5.0
+    context-operator-learning: t
+    ga: 1.0
+    input-activation: 1.0
+    wm-activation: 1.0
+    retrieval-activation: 2.0
+    reward: 5.0
+    beta: 0.1
+    opc: t
+    explore-exploit: 0.5
+}
+
+define facts {
+	(vanilla one x)
+	(thumb two x)
+	(ice three x)
+	(ring four x)
+	(paper five x)
+	(pinkie six x)
+	(associate seven x)
+	(taste eight x)
+	(temperature nine x)
+	(weight ten x)
+	(texture eleven x)
+	(color twelve x)
+}
+
+
+define facts {
+	(f1 associate vanilla thumb)
+	(f2 associate ice ring)
+	(f3 associate paper pinkie)
+	(fa1 taste vanilla sweet)
+	(fa2 temperature ice cold)
+	(fa3 weight paper small)
+	(fb1 color vanilla yellow)
+	(fb2 texture ice slippery)
+	(fb3 color paper white)
+}
+
+
+define init-script {
+	set-graph-title("Accuracy")
+	set-average-window(20)
+}
+
+define script {
+	trial-start()
+	set-goal("paired-associate",["fact-type","associate"])
+	stimuli = ["vanilla", "ice", "paper"]
+	responses = ["thumb", "ring", "pinkie"]
+    pair = random(3)
+	
+    print("Testing",stimuli[pair],"and",responses[pair])
+    screen(stimuli[pair])
+    run-until-relative-time-or-action(5.0, "action")
+    ac = last-action()
+    if (ac[0] != "action") {
+		issue-reward(-0.5)
+		print("Out of time or Illegal action.")
+		plot-point(0)
+		data-line("0")
+	}  else {	
+		if (ac[1] == responses[pair]) {
+			issue-reward()
+			print("Correct!")
+			plot-point(1)
+			data-line("1")
+
+		} else {
+			issue-reward(-1)
+			print("Wrong")
+			plot-point(0)
+			data-line("0")
+		}   
+	}
+    trial-end()
+    sleep(5.0)
+}

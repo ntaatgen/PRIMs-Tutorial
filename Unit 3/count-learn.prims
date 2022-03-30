@@ -36,16 +36,19 @@ define action say {
 define script {
 	set-graph-title("Accuracy") // We want to plot accuracy instead of latency
 	set-average-window(10)	// Accuracy is just 0's and 1's, so we want to smooth a bit.
-	set-goal("count-learn",["fact-type","count-fact"],["action","say"],["final-action","stop"],["final-response","stop"])
+	add-binding("fact-type","count-fact")
+	add-binding("action","say")
+	add-binding("final-action","respond")
+	add-binding("final-response","stop")
     digits = ["one","two","three","four","five","six","seven",
         "eight","nine","ten"]
     start = random(3)
     end = start + 1 + random(3)
     print("Counting from",digits[start],"to",digits[end])
     screen(digits[start],digits[end])
-    run-until-action("stop")
+    run-until-action("respond")
     ac = last-action()
-    if (ac[1] == "stop") {
+    if (ac[0] == "respond") {
     	plot-point(1)
     	issue-reward()
     } else {

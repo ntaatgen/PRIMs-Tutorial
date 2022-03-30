@@ -3,7 +3,7 @@
 // Make sure to load count-rev2.prims first 
 
 define task semantic {
-    initial-skills: (read-one)
+    initial-skills: (read)
     ol: t
     rt: -2.0
     lf: 0.2
@@ -11,6 +11,15 @@ define task semantic {
     default-activation: 1.0
 }
 
+define skill alt-respond {
+	operator carry-out-action {
+		G1 <> nil // Operators require at least one condition
+		==>
+		*alt-respond-action -> AC1
+		*alt-respond-arg -> AC2
+		nil -> G1
+	}
+}
 
 define action subvocalize {
     latency: 0.2
@@ -41,10 +50,15 @@ define facts {
 
 
 define script {
-	instantiate-skill("read", "read-one", ["next-skill","iterate-one"])
-	instantiate-skill("iterate", "iterate-one", ["fact-type", "property"],["action", "sub-vocalize"], ["final-action-skill", "respond-yes"],["fail-skill", "respond-no"])
-	instantiate-skill("respond","respond-yes", ["action","say"], ["arg","yes"])
-	instantiate-skill("respond","respond-no", ["action", "say"], ["arg","no"])
+	add-binding("next-skill","iterate")
+	add-binding("action","sub-vocalize")
+	add-binding("fact-type","property")
+	add-binding("final-action-skill","respond")
+	add-binding("fail-skill","alt-respond")
+	add-binding("respond-action","say")
+	add-binding("respond-arg","yes")
+	add-binding("alt-respond-action","say")
+	add-binding("alt-respond-arg","no")
 
     pairs = [["lion","living-thing","yes"],["tulip","animal","no"],["mammal","living-thing","yes"],["lion","plant","no"]]
     pairno = random(length(pairs))

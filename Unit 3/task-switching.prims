@@ -2,7 +2,7 @@
 // Adapted from the original PR model
 
 define task task-switching {
-    initial-skills: (food-task)
+    initial-skills: (choice-reaction)
     lf: 0.2
     egs: 0.05
     rt: -1.0
@@ -15,7 +15,6 @@ define task task-switching {
     reward: 80.0
     default-operator-assoc: 8.0
     default-inter-operator-assoc: 4.0
-	references: (prepare)
 }
 
 define skill choice-reaction {
@@ -95,13 +94,13 @@ define skill prepare-next {
         ==>
         one -> WM1
         othertask -> RT1
-        G1 -> RT2
+        *property -> RT2
     }
 
     operator set-other-task {
         RT1 = othertask
         ==>
-        RT3 -> G1
+        RT3 -> *property
         nil -> G2 
         wait -> AC1
     }
@@ -111,8 +110,8 @@ define facts {
     (cf1 count-fact  one  two)
     (cf2 count-fact  two  three)
 
-    (ot1 othertask size-task food-task)
-    (ot2 othertask food-task size-task)
+    (ot1 othertask size food)
+    (ot2 othertask food size)
     
     (mp1 mapping fruit left)
     (mp2 mapping vegetable right)
@@ -126,6 +125,8 @@ define script {
     sizes = ["large","small"]
     instantiate-skill("choice-reaction","food-task",["prepare", "prepare-next"],["property", "food"])    
     instantiate-skill("choice-reaction","size-task",["prepare", "prepare-next"],["property", "size"])    
+    add-binding("property","food")
+    add-binding("prepare","prepare-next")
     for i in 0 to 7 {
         screen("fixation")
         run-relative-time(1.0)

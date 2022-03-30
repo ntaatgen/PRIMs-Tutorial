@@ -1,7 +1,7 @@
 // Semantic, but now with also answers questions about attributes
 
 define task semantic {
-  initial-skills: (read-one)
+  initial-skills: (read)
   default-activation: 1.0 
   ol: t
   rt: -2.0
@@ -10,100 +10,40 @@ define task semantic {
   retrieval-reinforces: t
 }
 
-define skill read {
-	operator read-for-two-items {
-		V1 <> nil
-		V2 <> nil
-		WM1 = nil
-	==>
-		V1 -> WM1
-		V2 -> WM2
-	}
-	operator switch-to-next-skill {
-		V1 = WM1
-	==>
-		*next-skill -> G1
-	}
-}
-
-define skill iterate {
-//  Start iteration
-  operator start-iteration {
-   WM3 = nil  // Slot we use for iterator is empty
-  ==>
-   WM1 -> WM3	
-   *sub-skill -> G1
-   }
-
-  operator do-sub-skill {
-   RT1 = *fact-type
-   ==>
-   RT3 -> WM3
-   *sub-skill -> G1
-  }
-
-//    Iterate as long WM2 does not match the final goal
-  operator retrieve-next {
-    RT1 = nil
-    WM3 <> nil
-    WM2 <> WM3
-   ==>
-    *fact-type -> RT1
-    WM3 -> RT2
-  }
-
-//    Stop when reaching final match
-  operator final {
-    WM2 = WM3
-    RT1 = nil
-   ==>
-    *final-action-skill -> G1
-  }
-
-// If the iteration fails, do the final-action on final-response-negative
-  operator final-fail {
-  	WM2 <> WM3
-  	RT1 = error
-  	==>
-  	*fail-skill -> G1
-	}
-}
-
 define skill attempt-retrieve {
 	operator start-retrieve {
 		WM2 <> nil
 		WM3 <> nil
 		RT1 = nil
 	==>
-		*fact-type -> RT1
+		*attribute-fact-type -> RT1
 		WM3 -> RT2
 		WM2 -> RT3
 	}
 	
 	operator on-success {
-		RT1 = *fact-type
+		RT1 = *attribute-fact-type
 	==>
-		*success-skill -> G1
+		*retrieve-success-skill -> G1
 	}
 	
 	operator on-fail {
 		RT1 = error
 	==>
-		*fail-skill -> G1
+		*retrieve-fail-skill -> G1
 	}
 }
 
 
-define skill respond {
+define skill alt-respond {
 	operator carry-out-action {
 		G1 <> nil // Operators require at least one condition
 		==>
-		*action -> AC1
-		*arg -> AC2
+		*alt-respond-action -> AC1
+		*alt-respond-arg -> AC2
 		nil -> G1
 	}
 }
-
 
 define action say {
   latency: 0.3
@@ -130,11 +70,21 @@ define facts {
 	(sem16 has-attribute plant roots)
 }
 
+/// Assignment: Fill in the XXX's in the script
 
 define script {
-	instantiate-skill("read", "read-one", ["next-skill","iterate-one"])
-// Instantiate the rest of the skills here
-
+	add-binding("next-skill",XXX)
+	add-binding("fact-type",XXX)
+	add-binding("attribute-fact-type",XXX)
+	add-binding("final-action-skill",XXX)
+	add-binding("fail-skill",XXX)
+	add-binding("respond-action",XXX)
+	add-binding("respond-arg",XXX)
+	add-binding("alt-respond-action",XXX)
+	add-binding("alt-respond-arg",XXX)
+	add-binding("sub-skill",XXX)
+	add-binding("retrieve-success-skill",XXX)
+	add-binding("retrieve-fail-skill",XXX)
     pairs = [["lion","flies","no"], ["robin","flies","yes"], ["mammal","cells","yes"], ["plant","roots","yes"], ["lion","living-thing","yes"], ["tulip","animal","no"], ["mammal","living-thing","yes"], ["lion","plant","no"]]
     pairno = random(length(pairs))
     pair = pairs[pairno]
