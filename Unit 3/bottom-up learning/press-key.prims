@@ -28,7 +28,7 @@ define script {
 	trial-start()
 	responses = ["thumb", "ring", "pinkie"]
     finger = random(3)
-	set-goal("perceive",["next-goal-type","press-key"])
+    add-binding("next-goal-type","press-key")
     print("Testing",responses[finger])
     screen(responses[finger])
     run-until-relative-time-or-action(5.0, "action")

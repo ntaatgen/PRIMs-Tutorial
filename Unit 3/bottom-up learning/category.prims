@@ -54,7 +54,8 @@ define init-script {
 
 define script {
 	trial-start()
-	set-goal("category",["fact-type","category"],["fact-type-two","response"])
+	add-binding("fact-type","category")
+	add-binding("fact-type-two","response")
 
 	stimuli = ["goat", "pinguin", "cabbage", "tulip"]
 	responses = ["left", "left", "right","right"]

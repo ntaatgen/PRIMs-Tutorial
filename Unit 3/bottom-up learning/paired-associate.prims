@@ -54,7 +54,7 @@ define init-script {
 
 define script {
 	trial-start()
-	set-goal("paired-associate",["fact-type","associate"])
+	add-binding("fact-type","associate")
 	stimuli = ["vanilla", "ice", "paper"]
 	responses = ["thumb", "ring", "pinkie"]
     pair = random(3)
