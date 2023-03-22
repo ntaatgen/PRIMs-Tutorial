@@ -1,0 +1,44 @@
+/// Model template for PRIMs
+/// Fill in anything in <>
+
+
+define task <TASK-NAME> {
+  initial-skills: (<ONE MORE SKILLS SEPARATES BY A SPACE>) // In this example the task and the goal are the same
+  default-activation: 1.0
+  <OTHER PARAMETERS>
+}
+
+define skill <SKILL-NAME> {
+
+  operator <FIRST-OPERATOR> {
+  <CONDITIONS>
+  ==>
+  <ACTIONS>
+   }
+
+<MORE OPERATORS>
+
+}
+
+
+define facts {
+    (cf1 count-fact  one  two)
+<MORE FACTS>
+}
+
+define action say {
+  latency: 0.3
+  noise: 0.1
+  distribution: uniform
+  output: Saying
+}
+
+<MORE ACTIONS>
+
+define script {
+<SCRIPTS STATEMENTS TO IMPLEMENT TASK>
+    issue-reward()
+    trial-end()
+}
+
+}

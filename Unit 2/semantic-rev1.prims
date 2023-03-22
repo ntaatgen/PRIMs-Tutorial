@@ -3,7 +3,7 @@
 // Make sure to load count-rev1.prims first for the iterate skill
 
 define task semantic {
-    initial-skills: (iterate)
+    initial-skills: (semantic)
     ol: t
     rt: -2.0
     lf: 0.2
@@ -11,6 +11,18 @@ define task semantic {
     default-activation: 1.0
 }
 
+define skill semantic {
+	operator set-instruction {
+		G1 = semantic
+	==>
+		property -> *fact-type
+		sub-vocalize -> *action
+		say -> *final-action
+		yes -> *final-response
+		no -> *final-response-negative
+		iterate -> G1
+	}
+}
 
 define action subvocalize {
     latency: 0.2

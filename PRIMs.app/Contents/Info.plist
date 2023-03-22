@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>21A559</string>
+	<string>22C65</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDocumentTypes</key>
@@ -11,16 +11,42 @@
 		<dict>
 			<key>CFBundleTypeExtensions</key>
 			<array>
-				<string>prims</string>
+				<string></string>
 			</array>
 			<key>CFBundleTypeIconFile</key>
-			<string>PrimsModelFileIcon</string>
+			<string>PrimsDocumentIcon</string>
 			<key>CFBundleTypeName</key>
 			<string>PRIMs model file</string>
 			<key>CFBundleTypeRole</key>
 			<string>None</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>nl.rug.ai.taatgen.PRIMs.prims-model</string>
+			</array>
 			<key>LSTypeIsPackage</key>
-			<integer>0</integer>
+			<string></string>
+		</dict>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>bprims</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>PrimsDocumentIcon</string>
+			<key>CFBundleTypeName</key>
+			<string>PRIMs script file</string>
+			<key>CFBundleTypeRole</key>
+			<string>None</string>
+			<key>LSHandlerRank</key>
+			<string>Default</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>nl.rug.ai.taatgen.PRIMs.prims-script</string>
+			</array>
+			<key>LSTypeIsPackage</key>
+			<string></string>
 		</dict>
 	</array>
 	<key>CFBundleExecutable</key>
@@ -38,56 +64,30 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.4</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
+	<string>2.0</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array>
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>10</string>
+	<string>2</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>13E500a</string>
+	<string>14C18</string>
 	<key>DTPlatformName</key>
 	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>12.3</string>
+	<string>13.1</string>
 	<key>DTSDKBuild</key>
-	<string>21E226</string>
+	<string>22C55</string>
 	<key>DTSDKName</key>
-	<string>macosx12.3</string>
+	<string>macosx13.1</string>
 	<key>DTXcode</key>
-	<string>1331</string>
+	<string>1420</string>
 	<key>DTXcodeBuild</key>
-	<string>13E500a</string>
-	<key>LSApplicationCategoryType</key>
-	<string>public.app-category.developer-tools</string>
+	<string>14C18</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.11</string>
-	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2015-2022 Niels Taatgen. All rights reserved.</string>
-	<key>NSMainStoryboardFile</key>
-	<string>Main</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
-	<key>UTImportedTypeDeclarations</key>
-	<array>
-		<dict>
-			<key>UTTypeDescription</key>
-			<string>Prim model file</string>
-			<key>UTTypeIconFile</key>
-			<string>PrimsModelFileIcon</string>
-			<key>UTTypeTagSpecification</key>
-			<dict>
-				<key>public.filename-extension</key>
-				<array>
-					<string>prims</string>
-				</array>
-			</dict>
-		</dict>
-	</array>
+	<string>13.1</string>
 </dict>
 </plist>

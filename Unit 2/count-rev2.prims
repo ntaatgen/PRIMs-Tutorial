@@ -1,7 +1,7 @@
 // More general version of count
 
 define task count {
-  initial-skills: (read)
+  initial-skills: (count)
   default-activation: 1.0 // All chunks defined in this model receive a fixed baselevel activation of 1.0
   ol: t
   rt: -2.0
@@ -9,7 +9,23 @@ define task count {
   default-operator-self-assoc: 0.0
   egs: 0.05
   retrieval-reinforces: t
+  bindings-in-dm: t
 }
+
+define skill count {
+	operator set-instruction {
+		G1 = count
+	==>
+		count-fact -> *fact-type
+		say -> *action
+		say -> *respond-action
+		stop -> *respond-arg
+		iterate -> *next-skill
+		respond -> *final-action-skill
+		read -> G1
+	}
+}
+
 
 define skill read {
 	operator read-for-two-items {
@@ -97,12 +113,6 @@ define action say {
 }
 
 define script {
-	add-binding("next-skill","iterate")
-	add-binding("action","say")
-	add-binding("fact-type","count-fact")
-	add-binding("final-action-skill","respond")
-	add-binding("respond-action","say")
-	add-binding("respond-arg","stop")
     digits = ["one","two","three","four","five","six","seven",
         "eight","nine","ten"]
     start = random(3)

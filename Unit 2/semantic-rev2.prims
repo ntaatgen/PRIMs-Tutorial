@@ -3,13 +3,31 @@
 // Make sure to load count-rev2.prims first 
 
 define task semantic {
-    initial-skills: (read)
+    initial-skills: (semantic)
     ol: t
     rt: -2.0
     lf: 0.2
     default-operator-self-assoc: 0.0
     default-activation: 1.0
 }
+
+define skill semantic {
+	operator set-instruction {
+		G1 = semantic
+	==>
+		property -> *fact-type
+		sub-vocalize -> *action
+		say -> *respond-action
+		yes -> *respond-arg
+		iterate -> *next-skill
+		respond -> *final-action-skill
+		fail-skill -> *alt-respond
+		say -> *alt-respond-action
+		no -> *alt-respond-arg
+		read -> G1
+	}
+}
+
 
 define skill alt-respond {
 	operator carry-out-action {
@@ -50,16 +68,6 @@ define facts {
 
 
 define script {
-	add-binding("next-skill","iterate")
-	add-binding("action","sub-vocalize")
-	add-binding("fact-type","property")
-	add-binding("final-action-skill","respond")
-	add-binding("fail-skill","alt-respond")
-	add-binding("respond-action","say")
-	add-binding("respond-arg","yes")
-	add-binding("alt-respond-action","say")
-	add-binding("alt-respond-arg","no")
-
     pairs = [["lion","living-thing","yes"],["tulip","animal","no"],["mammal","living-thing","yes"],["lion","plant","no"]]
     pairno = random(length(pairs))
     pair = pairs[pairno]

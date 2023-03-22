@@ -1,5 +1,6 @@
 // First example model: counting
 // Adapted from the ACT-R tutorial by Niels Taatgen
+//
 
 define task count {
   initial-skills: (count) // In this example the task and the goal are the same
@@ -12,11 +13,12 @@ define task count {
   retrieval-reinforces: t
 }
 
+
 define skill count {
 //  Start counting
   operator start-count {
-   V1 <> nil  // There has to be a visual input with the starting number
-   WM1 = nil  // Imaginal should be empty
+   V1 <> nil  // There has to be an input with the starting number
+   WM1 = nil  // Working Memory should be empty
   ==>
    V1 -> WM1 // Copy the start number to working memory
    count-fact -> RT1 // Start retrieving the next number
@@ -68,6 +70,7 @@ define action say {
 }
 
 define script {
+	set-graph-title("Reaction time")
     digits = ["one","two","three","four","five","six","seven",
         "eight","nine","ten"]
     start = random(3)
