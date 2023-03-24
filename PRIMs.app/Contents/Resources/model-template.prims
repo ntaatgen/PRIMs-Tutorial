@@ -3,7 +3,7 @@
 
 
 define task <TASK-NAME> {
-  initial-skills: (<ONE MORE SKILLS SEPARATES BY A SPACE>) // In this example the task and the goal are the same
+  initial-skills: (<ONE MORE SKILLS SEPARATES BY A SPACE>)
   default-activation: 1.0
   <OTHER PARAMETERS>
 }
@@ -41,4 +41,3 @@ define script {
     trial-end()
 }
 
-}
