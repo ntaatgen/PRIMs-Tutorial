@@ -1,0 +1,52 @@
+/// Model template for PRIMs
+/// Fill in anything in <>
+
+
+define task associate {
+  initial-skills: (associate)
+  default-activation: 1.0
+}
+
+define skill associate {
+
+  operator retrieve-key {
+  V1 <> nil
+  ==>
+  associate -> RT1
+  V1 -> RT2
+   }
+
+ 	operator press-key {
+	V1 = RT2
+	==>
+	press -> AC1
+	RT3 -> AC2
+}
+
+}
+
+define facts {
+    (cf1 associate vanilla 3)
+	(cf2 associate penguin 4)
+	(cf3 associate computer 5)
+}
+
+define action press {
+  latency: 0.2
+  noise: 0.1
+  distribution: uniform
+  output: Pressing
+}
+
+
+
+define script {
+	stimuli = ["vanilla","penguin","computer"]
+	stimulus = stimuli[random(3)]
+	print("Stimulus is ", stimulus)
+	screen(stimulus)
+	run-until-action("press")
+    issue-reward()
+    trial-end()
+}
+
