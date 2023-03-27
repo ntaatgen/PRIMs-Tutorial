@@ -29,12 +29,15 @@ define facts {
 
 define action say {
   latency: 0.3
-  output: Say
+  noise: 0.1
+  distribution: uniform
+  output: Saying
 }
 
 define script {
 	stimuli = ["low", "medium", "high"]
 	stimulus = stimuli[random(3)]
+	print("Stimulus is ", stimulus)
 	screen(stimulus)
 	run-until-action("say")
 	issue-reward()
