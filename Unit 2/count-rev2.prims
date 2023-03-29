@@ -19,7 +19,7 @@ define skill count {
 		count-fact -> *fact-type
 		say -> *action
 		say -> *respond-action
-		stop -> *respond-arg
+		stop -> *success-arg
 		iterate -> *next-skill
 		respond -> *final-action-skill
 		read -> G1
@@ -72,6 +72,7 @@ define skill iterate {
     WM2 = WM3
    ==>
     *final-action-skill -> G1
+	*success-arg -> *respond-arg
   }
 
 // If the iteration fails, do the final-action on final-response-negative
@@ -79,7 +80,8 @@ define skill iterate {
   	WM2 <> WM3
   	RT1 = error
   	==>
-  	*fail-skill -> G1
+  	*final-action-skill -> G1
+	*failure-arg -> *respond-arg
 	}
 }
 

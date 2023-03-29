@@ -1,0 +1,96 @@
+/// Model of paired associates
+
+
+define task paired {
+  initial-skills: (paired)
+  default-activation: 1.0
+  rt: -0.8
+  ans: 0.4
+  lf: 0.2
+}
+
+define skill paired {
+
+	operator read-and-retrieve {
+		V1 = stimulus
+	==>
+		associate -> RT1
+		V2 -> RT2
+		V2 -> WM2
+	}
+
+	operator retrieval-success-press-key {
+		RT1 = associate
+	==>
+		press -> AC1
+		RT3 -> AC2
+	}
+
+	operator retrieval-failure {
+		RT1 = error
+	==>
+		press -> AC1
+		q -> AC2
+	}
+
+	operator process-feedback {
+		V1 = feedback
+	==>
+		V2 -> WM3
+		associate -> WM1
+		done -> AC1
+	}
+}
+
+
+
+define action press {
+  latency: 0.2
+  noise: 0.1
+  distribution: uniform
+  output: Pressing
+}
+
+
+define script {
+	custom-points()
+	// set-graph-title("Accuracy")
+	set-graph-title("Latency")
+	stimuli = [["vanilla","A"],["penguin","B"],["motor","C"],["dog","D"],
+			["computer","E"],["keyboard","F"],["poster","G"],["book","H"],["telephone","I"],["paperweight","J"]]
+	stimuli = shuffle(stimuli)
+	i = 0
+	score = 0.0
+   count = 0.0
+	while (i < 10) {
+		stimuluspair = stimuli[i]
+		print("Stimulus is ",stimuluspair[0])
+		screen("stimulus", stimuluspair[0])
+		start = time()
+		run-until-action("press")
+		ac = last-action()
+		response = ac[1]
+		set-data-file-field(0, time() - start)
+		if (response == stimuluspair[1]) {
+		//	score = score + 1.0
+			score = score + time() - start
+			count = count + 1
+			set-data-file-field(1, 1)
+		} else {
+			set-data-file-field(1, 0)
+		}
+		screen("feedback", stimuluspair[1])
+		print("Feedback is ", stimuluspair[1])
+		run-until-action("done")
+       issue-reward()
+       trial-end()
+		i = i + 1
+	}
+	// plot-point(score/10)
+	if (count == 0) {
+		plot-point(0)
+	} else {
+		plot-point(score/count)
+	}
+}
+

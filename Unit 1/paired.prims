@@ -45,8 +45,6 @@ define skill paired {
 }
 
 
-
-
 define action press {
   latency: 0.2
   noise: 0.1
@@ -73,11 +71,15 @@ define script {
 		run-until-action("press")
 		ac = last-action()
 		response = ac[1]
+		set-data-file-field(0, time() - start)
 		if (response == stimuluspair[1]) {
 		//	score = score + 1.0
 			score = score + time() - start
 			count = count + 1
-		} 
+			set-data-file-field(1, 1)
+		} else {
+			set-data-file-field(1, 0)
+		}
 		screen("feedback", stimuluspair[1])
 		print("Feedback is ", stimuluspair[1])
 		run-until-action("done")

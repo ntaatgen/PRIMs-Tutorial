@@ -18,26 +18,14 @@ define skill semantic {
 		property -> *fact-type
 		sub-vocalize -> *action
 		say -> *respond-action
-		yes -> *respond-arg
+		yes -> *success-arg
 		iterate -> *next-skill
 		respond -> *final-action-skill
-		fail-skill -> *alt-respond
-		say -> *alt-respond-action
-		no -> *alt-respond-arg
+		no -> *failure-arg
 		read -> G1
 	}
 }
 
-
-define skill alt-respond {
-	operator carry-out-action {
-		G1 <> nil // Operators require at least one condition
-		==>
-		*alt-respond-action -> AC1
-		*alt-respond-arg -> AC2
-		nil -> G1
-	}
-}
 
 define action subvocalize {
     latency: 0.2
