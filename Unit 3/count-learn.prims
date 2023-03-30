@@ -8,7 +8,7 @@ define task count-learn {
     rt: -2.0
     lf: 0.2
     default-operator-self-assoc: 0.0
-    goal-operator-learning: t
+    skill-operator-learning: t
     reward: 5.0
     beta: 0.1
 }
@@ -46,7 +46,7 @@ define script {
     end = start + 1 + random(3)
     print("Counting from",digits[start],"to",digits[end])
     screen(digits[start],digits[end])
-    run-until-action("respond")
+    run-relative-time-or-action(10,"respond")
     ac = last-action()
     if (ac[0] == "respond") {
     	plot-point(1)

@@ -11,7 +11,8 @@ define task category {
     default-operator-assoc: 5.0
     default-operator-self-assoc: 0.0
     default-inter-operator-assoc: 0.0
-    goal-operator-learning: t
+    skill-operator-learning: t
+//    context-operator-learning: t
     reward: 10.0
     beta: 0.1
     opc: t // operator compilation
