@@ -9,7 +9,8 @@ define task count-learn {
     lf: 0.2
     default-operator-self-assoc: 0.0
     skill-operator-learning: t
-    reward: 5.0
+//	context-operator-learning: t
+    reward: 10.0
     beta: 0.1
 }
 

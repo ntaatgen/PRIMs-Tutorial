@@ -95,7 +95,12 @@ define init-script {
 
 define script {
     screen("start")
-    run-relative-time(6.0)
+	runtime = 6.0
+	parameters = batch-parameters()
+	if (parameters != "NA") {
+		runtime = parameters[0]
+	}
+    run-relative-time(runtime)
     screen("stop")
     run-relative-time(1.0)
     screen("reproduce")

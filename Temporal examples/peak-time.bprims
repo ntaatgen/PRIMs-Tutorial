@@ -1,3 +1,7 @@
-repeat 100
+repeat 10
 reset
-run peak-time peak-time 300
+run peak-time peak-time8 300 8.0
+reset
+run peak-time peak-time12 300 12.0
+reset
+run peak-time peak-time21 300 21.0
